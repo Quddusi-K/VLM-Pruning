@@ -415,10 +415,7 @@ else:   # LLaVA-NeXT: same tau as LLaVA-1.5, no recalibration
      .replace('os.system(f"cd {WORK} && zip -rq phaseB_results.zip phaseB")\nprint("zipped ->", WORK / "phaseB_results.zip")',
               'os.system(f"cd {WORK} && zip -rq phaseB2_{MODEL_TAG}.zip phaseB2/{MODEL_TAG}")\nprint("zipped ->", WORK / f"phaseB2_{MODEL_TAG}.zip")'))
 code(grab("code(r'''\ndef mcnemar(a, b):", "md(r'''\n## What to send back")[len("code(r'''\n"):-len("''')\n\n")]
-     .replace('base = runs["baseline"]; base_pred = {r["id"]: r["pred"] for r in base}',
-              'base = runs["baseline"]')
-     .replace('agree = np.mean([base_pred[r["id"]] == r["pred"] for r in recs])',
-              'agree = np.mean([x["pred"] == y["pred"] for x, y in zip(recs, base)])   # by position (MME ids repeat)'))
+     )   # the summary cell in build_phaseB.py already aligns MME by position
 
 md(r'''
 ## What to send back

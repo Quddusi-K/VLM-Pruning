@@ -1,0 +1,500 @@
+{"id": "tv:36823", "answer": "94043", "exit_layer": 26, "rel_flops": 0.6409, "t_prefill": 0.3769, "t_total": 0.7472, "n0": 609, "pred": "94043", "correct": 1.0}
+{"id": "tv:35824", "answer": "12:00", "exit_layer": null, "rel_flops": 0.7713, "t_prefill": 0.4346, "t_total": 0.8089, "n0": 604, "pred": "1200", "correct": 0.0}
+{"id": "tv:34829", "answer": "Brick", "exit_layer": 22, "rel_flops": 0.5505, "t_prefill": 0.3191, "t_total": 0.4442, "n0": 606, "pred": "brick", "correct": 1.0}
+{"id": "tv:39264", "answer": "Star wars", "exit_layer": 22, "rel_flops": 0.5527, "t_prefill": 0.3222, "t_total": 0.445, "n0": 609, "pred": "star wars", "correct": 1.0}
+{"id": "tv:37631", "answer": "9", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4305, "t_total": 0.5556, "n0": 608, "pred": "9", "correct": 1.0}
+{"id": "tv:38030", "answer": "B118", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.3496, "t_total": 0.5952, "n0": 605, "pred": "b118", "correct": 1.0}
+{"id": "tv:36100", "answer": "Jruby", "exit_layer": 26, "rel_flops": 0.6403, "t_prefill": 0.3672, "t_total": 0.4905, "n0": 608, "pred": "jruby", "correct": 1.0}
+{"id": "tv:35329", "answer": "Bristol, ct", "exit_layer": 25, "rel_flops": 0.6158, "t_prefill": 0.3531, "t_total": 0.6657, "n0": 604, "pred": "bristol ct", "correct": 0.0}
+{"id": "tv:35987", "answer": "Top", "exit_layer": 24, "rel_flops": 0.5948, "t_prefill": 0.3509, "t_total": 0.4136, "n0": 606, "pred": "top", "correct": 1.0}
+{"id": "tv:34652", "answer": "9:00", "exit_layer": 27, "rel_flops": 0.6629, "t_prefill": 0.3867, "t_total": 0.6953, "n0": 609, "pred": "900", "correct": 0.0}
+{"id": "tv:39073", "answer": "Car wash", "exit_layer": null, "rel_flops": 0.7742, "t_prefill": 0.442, "t_total": 0.6292, "n0": 612, "pred": "car wash", "correct": 1.0}
+{"id": "tv:35145", "answer": "Usa", "exit_layer": 26, "rel_flops": 0.6403, "t_prefill": 0.3721, "t_total": 0.4956, "n0": 608, "pred": "usa", "correct": 0.0}
+{"id": "tv:35371", "answer": "Gatorade", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4344, "t_total": 0.6237, "n0": 608, "pred": "gatorade", "correct": 0.0}
+{"id": "tv:36945", "answer": "Centru", "exit_layer": null, "rel_flops": 0.7735, "t_prefill": 0.4391, "t_total": 0.5646, "n0": 610, "pred": "centru", "correct": 0.0}
+{"id": "tv:36358", "answer": "An", "exit_layer": null, "rel_flops": 0.7717, "t_prefill": 0.4297, "t_total": 0.4942, "n0": 605, "pred": "", "correct": 0.0}
+{"id": "tv:39584", "answer": "Sale", "exit_layer": 24, "rel_flops": 0.5974, "t_prefill": 0.3501, "t_total": 0.4732, "n0": 610, "pred": "sale", "correct": 1.0}
+{"id": "tv:35125", "answer": "Beer", "exit_layer": null, "rel_flops": 0.7717, "t_prefill": 0.4386, "t_total": 0.5808, "n0": 605, "pred": "beer", "correct": 0.6666666666666666}
+{"id": "tv:39520", "answer": "007", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4475, "t_total": 0.6977, "n0": 606, "pred": "007", "correct": 0.0}
+{"id": "tv:38090", "answer": "Ski-doo", "exit_layer": 22, "rel_flops": 0.5541, "t_prefill": 0.3223, "t_total": 0.5667, "n0": 611, "pred": "skidoo", "correct": 0.0}
+{"id": "tv:38710", "answer": "1912", "exit_layer": 30, "rel_flops": 0.729, "t_prefill": 0.4231, "t_total": 0.7322, "n0": 609, "pred": "1912", "correct": 0.0}
+{"id": "tv:36245", "answer": "Classical", "exit_layer": 23, "rel_flops": 0.5754, "t_prefill": 0.3366, "t_total": 0.4597, "n0": 610, "pred": "classical", "correct": 0.0}
+{"id": "tv:37650", "answer": "Dairy", "exit_layer": 25, "rel_flops": 0.6176, "t_prefill": 0.3618, "t_total": 0.5471, "n0": 607, "pred": "dairy", "correct": 1.0}
+{"id": "tv:38969", "answer": "Saturday morning cartoons", "exit_layer": 23, "rel_flops": 0.5734, "t_prefill": 0.3411, "t_total": 0.6467, "n0": 607, "pred": "saturday morning cartoons", "correct": 0.0}
+{"id": "tv:36897", "answer": "10:10", "exit_layer": 27, "rel_flops": 0.6618, "t_prefill": 0.3893, "t_total": 0.7639, "n0": 607, "pred": "1010", "correct": 0.0}
+{"id": "tv:39467", "answer": "Sheep", "exit_layer": 26, "rel_flops": 0.6437, "t_prefill": 0.3752, "t_total": 0.4988, "n0": 614, "pred": "sheep", "correct": 0.0}
+{"id": "tv:36615", "answer": "0", "exit_layer": 16, "rel_flops": 0.4232, "t_prefill": 0.2694, "t_total": 0.3913, "n0": 612, "pred": "0", "correct": 0.0}
+{"id": "tv:35038", "answer": "Bacardi", "exit_layer": 24, "rel_flops": 0.5955, "t_prefill": 0.3508, "t_total": 0.4791, "n0": 607, "pred": "bacardi", "correct": 0.0}
+{"id": "tv:38136", "answer": "No", "exit_layer": 17, "rel_flops": 0.4398, "t_prefill": 0.2716, "t_total": 0.3333, "n0": 606, "pred": "no", "correct": 1.0}
+{"id": "tv:37776", "answer": "Volkswagen", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3233, "t_total": 0.4465, "n0": 607, "pred": "volkswagen", "correct": 0.6666666666666666}
+{"id": "tv:35492", "answer": "12:00", "exit_layer": null, "rel_flops": 0.7749, "t_prefill": 0.4452, "t_total": 0.8198, "n0": 614, "pred": "1200", "correct": 0.0}
+{"id": "tv:36197", "answer": "Enter", "exit_layer": 26, "rel_flops": 0.6409, "t_prefill": 0.3785, "t_total": 0.4417, "n0": 609, "pred": "enter", "correct": 1.0}
+{"id": "tv:35694", "answer": "Beatles", "exit_layer": 22, "rel_flops": 0.552, "t_prefill": 0.3229, "t_total": 0.4458, "n0": 608, "pred": "beatles", "correct": 1.0}
+{"id": "tv:38014", "answer": "Mopad", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4392, "t_total": 0.6253, "n0": 606, "pred": "mopad", "correct": 0.0}
+{"id": "tv:38226", "answer": "Word", "exit_layer": 25, "rel_flops": 0.6188, "t_prefill": 0.3601, "t_total": 0.4273, "n0": 609, "pred": "word", "correct": 0.0}
+{"id": "tv:39092", "answer": "British airways", "exit_layer": 27, "rel_flops": 0.6624, "t_prefill": 0.3847, "t_total": 0.5709, "n0": 608, "pred": "british airways", "correct": 1.0}
+{"id": "tv:39427", "answer": "Taxi", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.4411, "t_total": 0.5685, "n0": 609, "pred": "taxi", "correct": 0.0}
+{"id": "tv:36938", "answer": "Apple", "exit_layer": 28, "rel_flops": 0.6834, "t_prefill": 0.3926, "t_total": 0.4567, "n0": 606, "pred": "apple", "correct": 0.0}
+{"id": "tv:39284", "answer": "Saturday", "exit_layer": 22, "rel_flops": 0.5498, "t_prefill": 0.3263, "t_total": 0.3884, "n0": 605, "pred": "saturday", "correct": 0.6666666666666666}
+{"id": "tv:35895", "answer": "8", "exit_layer": 24, "rel_flops": 0.5948, "t_prefill": 0.3488, "t_total": 0.4721, "n0": 606, "pred": "8", "correct": 1.0}
+{"id": "tv:38231", "answer": "3", "exit_layer": 21, "rel_flops": 0.5276, "t_prefill": 0.3131, "t_total": 0.4376, "n0": 605, "pred": "3", "correct": 1.0}
+{"id": "tv:38811", "answer": "Line", "exit_layer": 24, "rel_flops": 0.5968, "t_prefill": 0.3496, "t_total": 0.4127, "n0": 609, "pred": "line", "correct": 0.0}
+{"id": "tv:34763", "answer": "S'mores", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4449, "t_total": 0.6946, "n0": 607, "pred": "smores", "correct": 0.0}
+{"id": "tv:38503", "answer": "United", "exit_layer": 27, "rel_flops": 0.665, "t_prefill": 0.3827, "t_total": 0.4457, "n0": 613, "pred": "united", "correct": 0.0}
+{"id": "tv:38023", "answer": "Stop", "exit_layer": 22, "rel_flops": 0.5498, "t_prefill": 0.3206, "t_total": 0.3869, "n0": 605, "pred": "stop", "correct": 1.0}
+{"id": "tv:38569", "answer": "Lg", "exit_layer": 26, "rel_flops": 0.6403, "t_prefill": 0.3736, "t_total": 0.498, "n0": 608, "pred": "lg", "correct": 1.0}
+{"id": "tv:37437", "answer": "If", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.4501, "t_total": 0.5138, "n0": 611, "pred": "if", "correct": 1.0}
+{"id": "tv:37744", "answer": "2", "exit_layer": 19, "rel_flops": 0.4841, "t_prefill": 0.2904, "t_total": 0.4131, "n0": 606, "pred": "2", "correct": 1.0}
+{"id": "tv:34684", "answer": "Kathy williams", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.4438, "t_total": 0.6938, "n0": 611, "pred": "kathy williams", "correct": 0.0}
+{"id": "tv:39136", "answer": "Stop", "exit_layer": 24, "rel_flops": 0.5955, "t_prefill": 0.3463, "t_total": 0.4094, "n0": 607, "pred": "stop", "correct": 1.0}
+{"id": "tv:38407", "answer": "War", "exit_layer": 22, "rel_flops": 0.5534, "t_prefill": 0.3203, "t_total": 0.383, "n0": 610, "pred": "war", "correct": 1.0}
+{"id": "tv:36325", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.446, "t_prefill": 0.271, "t_total": 0.3328, "n0": 613, "pred": "yes", "correct": 1.0}
+{"id": "tv:36085", "answer": "Thank you", "exit_layer": 23, "rel_flops": 0.5761, "t_prefill": 0.3416, "t_total": 0.4663, "n0": 611, "pred": "thank you", "correct": 0.0}
+{"id": "tv:39465", "answer": "Pyrex", "exit_layer": 23, "rel_flops": 0.5734, "t_prefill": 0.3417, "t_total": 0.5259, "n0": 607, "pred": "pyrex", "correct": 1.0}
+{"id": "tv:39364", "answer": "Samsung", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.3483, "t_total": 0.4781, "n0": 605, "pred": "samsung", "correct": 1.0}
+{"id": "tv:38740", "answer": "No", "exit_layer": 18, "rel_flops": 0.4637, "t_prefill": 0.2864, "t_total": 0.3597, "n0": 608, "pred": "no", "correct": 0.0}
+{"id": "tv:35420", "answer": "Taxi", "exit_layer": 23, "rel_flops": 0.5734, "t_prefill": 0.3327, "t_total": 0.4555, "n0": 607, "pred": "taxi", "correct": 1.0}
+{"id": "tv:37979", "answer": "Dragonfly Effect: Quick, Effective, and", "exit_layer": 25, "rel_flops": 0.6176, "t_prefill": 0.3625, "t_total": 0.914, "n0": 607, "pred": "dragonfly effect quick effective and", "correct": 0.0}
+{"id": "tv:37214", "answer": "Mini", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.4391, "t_total": 0.5646, "n0": 609, "pred": "mini", "correct": 0.0}
+{"id": "tv:39309", "answer": "Cuckoo's calling", "exit_layer": null, "rel_flops": 0.7713, "t_prefill": 0.4377, "t_total": 0.8098, "n0": 604, "pred": "cuckoos calling", "correct": 1.0}
+{"id": "tv:37024", "answer": "Good", "exit_layer": 21, "rel_flops": 0.5299, "t_prefill": 0.3131, "t_total": 0.3752, "n0": 608, "pred": "good", "correct": 1.0}
+{"id": "tv:37839", "answer": "Letters", "exit_layer": 23, "rel_flops": 0.572, "t_prefill": 0.3383, "t_total": 0.4634, "n0": 605, "pred": "letters", "correct": 0.0}
+{"id": "tv:39293", "answer": "Welnut", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4395, "t_total": 0.6256, "n0": 606, "pred": "welnut", "correct": 0.0}
+{"id": "tv:39168", "answer": "Jet star imperial", "exit_layer": 30, "rel_flops": 0.7282, "t_prefill": 0.4237, "t_total": 0.6118, "n0": 607, "pred": "jet star imperial", "correct": 1.0}
+{"id": "tv:35054", "answer": "China", "exit_layer": 20, "rel_flops": 0.5062, "t_prefill": 0.2992, "t_total": 0.3616, "n0": 606, "pred": "china", "correct": 1.0}
+{"id": "tv:37291", "answer": "Yellow", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4397, "t_total": 0.5665, "n0": 608, "pred": "yellow", "correct": 0.0}
+{"id": "tv:38554", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4389, "t_prefill": 0.276, "t_total": 0.3374, "n0": 605, "pred": "yes", "correct": 1.0}
+{"id": "tv:35701", "answer": "Brian Vaughan", "exit_layer": 29, "rel_flops": 0.7046, "t_prefill": 0.4098, "t_total": 0.6617, "n0": 604, "pred": "brian vaughan", "correct": 0.3333333333333333}
+{"id": "tv:36935", "answer": "A", "exit_layer": 21, "rel_flops": 0.5321, "t_prefill": 0.3146, "t_total": 0.3775, "n0": 611, "pred": "", "correct": 0.0}
+{"id": "tv:37993", "answer": "22", "exit_layer": 26, "rel_flops": 0.6426, "t_prefill": 0.3746, "t_total": 0.5661, "n0": 612, "pred": "22", "correct": 0.0}
+{"id": "tv:35179", "answer": "1996", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4426, "t_total": 0.7542, "n0": 606, "pred": "1996", "correct": 0.0}
+{"id": "tv:37097", "answer": "120", "exit_layer": 22, "rel_flops": 0.5505, "t_prefill": 0.3195, "t_total": 0.5655, "n0": 606, "pred": "120", "correct": 0.0}
+{"id": "tv:36551", "answer": "Philips", "exit_layer": 23, "rel_flops": 0.5734, "t_prefill": 0.3316, "t_total": 0.455, "n0": 607, "pred": "philips", "correct": 1.0}
+{"id": "tv:38567", "answer": "Go west", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4469, "t_total": 0.5725, "n0": 608, "pred": "go west", "correct": 1.0}
+{"id": "tv:37865", "answer": "Nothing", "exit_layer": 24, "rel_flops": 0.5974, "t_prefill": 0.3586, "t_total": 0.422, "n0": 610, "pred": "nothing", "correct": 0.0}
+{"id": "tv:35968", "answer": "Bus", "exit_layer": 28, "rel_flops": 0.6839, "t_prefill": 0.396, "t_total": 0.4589, "n0": 607, "pred": "bus", "correct": 0.0}
+{"id": "tv:38149", "answer": "1", "exit_layer": 21, "rel_flops": 0.5336, "t_prefill": 0.3098, "t_total": 0.4328, "n0": 613, "pred": "1", "correct": 1.0}
+{"id": "tv:35765", "answer": "T20", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.44, "t_total": 0.629, "n0": 606, "pred": "t20", "correct": 0.0}
+{"id": "tv:37525", "answer": "Bas Jan Aalbers", "exit_layer": 23, "rel_flops": 0.5713, "t_prefill": 0.3413, "t_total": 0.6492, "n0": 604, "pred": "bas jan aalbers", "correct": 0.0}
+{"id": "tv:39003", "answer": "Snowbird", "exit_layer": 22, "rel_flops": 0.5541, "t_prefill": 0.3273, "t_total": 0.4522, "n0": 611, "pred": "snowbird", "correct": 1.0}
+{"id": "tv:36360", "answer": "Chocolate", "exit_layer": 26, "rel_flops": 0.6409, "t_prefill": 0.3733, "t_total": 0.5581, "n0": 609, "pred": "chocolate", "correct": 0.0}
+{"id": "tv:39555", "answer": "T", "exit_layer": 20, "rel_flops": 0.5062, "t_prefill": 0.2955, "t_total": 0.358, "n0": 606, "pred": "t", "correct": 1.0}
+{"id": "tv:36548", "answer": "Nothing", "exit_layer": 22, "rel_flops": 0.5548, "t_prefill": 0.3227, "t_total": 0.3851, "n0": 612, "pred": "nothing", "correct": 0.0}
+{"id": "tv:34865", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4398, "t_prefill": 0.27, "t_total": 0.3316, "n0": 606, "pred": "yes", "correct": 1.0}
+{"id": "tv:35770", "answer": "Dark tower", "exit_layer": 23, "rel_flops": 0.5754, "t_prefill": 0.3415, "t_total": 0.4649, "n0": 610, "pred": "dark tower", "correct": 1.0}
+{"id": "tv:38163", "answer": "11", "exit_layer": 20, "rel_flops": 0.507, "t_prefill": 0.3028, "t_total": 0.4878, "n0": 607, "pred": "11", "correct": 0.0}
+{"id": "tv:36392", "answer": "Twins", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.44, "t_total": 0.5656, "n0": 607, "pred": "twins", "correct": 1.0}
+{"id": "tv:38714", "answer": "Chili", "exit_layer": 23, "rel_flops": 0.5747, "t_prefill": 0.3346, "t_total": 0.4587, "n0": 609, "pred": "chili", "correct": 0.6666666666666666}
+{"id": "tv:35138", "answer": "India", "exit_layer": 24, "rel_flops": 0.5935, "t_prefill": 0.3501, "t_total": 0.4123, "n0": 604, "pred": "india", "correct": 1.0}
+{"id": "tv:36019", "answer": "DONE", "exit_layer": null, "rel_flops": 0.7713, "t_prefill": 0.4383, "t_total": 0.5631, "n0": 604, "pred": "done", "correct": 0.0}
+{"id": "tv:38060", "answer": "Kruise", "exit_layer": 28, "rel_flops": 0.6844, "t_prefill": 0.3992, "t_total": 0.5235, "n0": 608, "pred": "kruise", "correct": 0.0}
+{"id": "tv:37250", "answer": "Kentucky", "exit_layer": 23, "rel_flops": 0.572, "t_prefill": 0.331, "t_total": 0.394, "n0": 605, "pred": "kentucky", "correct": 1.0}
+{"id": "tv:38943", "answer": "Keurig", "exit_layer": 22, "rel_flops": 0.5548, "t_prefill": 0.3259, "t_total": 0.5361, "n0": 612, "pred": "keurig", "correct": 1.0}
+{"id": "tv:36489", "answer": "10:10", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.436, "t_total": 0.8092, "n0": 608, "pred": "1010", "correct": 0.0}
+{"id": "tv:37882", "answer": "14", "exit_layer": 24, "rel_flops": 0.5987, "t_prefill": 0.3502, "t_total": 0.5366, "n0": 612, "pred": "14", "correct": 0.0}
+{"id": "tv:38107", "answer": "V", "exit_layer": null, "rel_flops": 0.7756, "t_prefill": 0.4478, "t_total": 0.5127, "n0": 616, "pred": "v", "correct": 1.0}
+{"id": "tv:39332", "answer": "100 mph", "exit_layer": null, "rel_flops": 0.7717, "t_prefill": 0.4404, "t_total": 0.8104, "n0": 605, "pred": "100 mph", "correct": 0.0}
+{"id": "tv:39236", "answer": "66th st", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.4413, "t_total": 0.75, "n0": 609, "pred": "66th st", "correct": 0.0}
+{"id": "tv:36198", "answer": "F", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4439, "t_total": 0.5076, "n0": 608, "pred": "f", "correct": 0.0}
+{"id": "tv:36183", "answer": "Citicorp", "exit_layer": 25, "rel_flops": 0.617, "t_prefill": 0.3601, "t_total": 0.5461, "n0": 606, "pred": "citicorp", "correct": 0.0}
+{"id": "tv:35105", "answer": "FREE", "exit_layer": 19, "rel_flops": 0.4833, "t_prefill": 0.2862, "t_total": 0.4092, "n0": 605, "pred": "free", "correct": 1.0}
+{"id": "tv:37428", "answer": "2007", "exit_layer": 30, "rel_flops": 0.7282, "t_prefill": 0.4251, "t_total": 0.7369, "n0": 607, "pred": "2007", "correct": 1.0}
+{"id": "tv:36845", "answer": "Science", "exit_layer": 23, "rel_flops": 0.5727, "t_prefill": 0.3376, "t_total": 0.3999, "n0": 606, "pred": "science", "correct": 1.0}
+{"id": "tv:37864", "answer": "22003", "exit_layer": 20, "rel_flops": 0.507, "t_prefill": 0.3011, "t_total": 0.6863, "n0": 607, "pred": "22003", "correct": 0.0}
+{"id": "tv:37015", "answer": "Smartphone", "exit_layer": 26, "rel_flops": 0.6391, "t_prefill": 0.3716, "t_total": 0.5559, "n0": 606, "pred": "smartphone", "correct": 0.3333333333333333}
+{"id": "tv:35256", "answer": "5", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4354, "t_total": 0.561, "n0": 608, "pred": "5", "correct": 1.0}
+{"id": "tv:38525", "answer": "Orient", "exit_layer": 28, "rel_flops": 0.6834, "t_prefill": 0.396, "t_total": 0.4595, "n0": 606, "pred": "orient", "correct": 1.0}
+{"id": "tv:35183", "answer": "12:21", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4393, "t_total": 0.8094, "n0": 608, "pred": "1221", "correct": 0.0}
+{"id": "tv:35007", "answer": "1", "exit_layer": 20, "rel_flops": 0.5102, "t_prefill": 0.3006, "t_total": 0.4239, "n0": 611, "pred": "1", "correct": 0.0}
+{"id": "tv:38768", "answer": "Great hall ceiling model", "exit_layer": 24, "rel_flops": 0.5955, "t_prefill": 0.3491, "t_total": 0.6538, "n0": 607, "pred": "great hall ceiling model", "correct": 1.0}
+{"id": "tv:35757", "answer": "Bagel", "exit_layer": 26, "rel_flops": 0.642, "t_prefill": 0.378, "t_total": 0.5026, "n0": 611, "pred": "bagel", "correct": 0.0}
+{"id": "tv:38721", "answer": "Hoff", "exit_layer": 28, "rel_flops": 0.6839, "t_prefill": 0.4001, "t_total": 0.4628, "n0": 607, "pred": "hoff", "correct": 1.0}
+{"id": "tv:36681", "answer": "King", "exit_layer": 20, "rel_flops": 0.5086, "t_prefill": 0.2991, "t_total": 0.3618, "n0": 609, "pred": "king", "correct": 1.0}
+{"id": "tv:34975", "answer": "Staten island", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.3477, "t_total": 0.5332, "n0": 605, "pred": "staten island", "correct": 1.0}
+{"id": "tv:38971", "answer": "7", "exit_layer": 24, "rel_flops": 0.5968, "t_prefill": 0.3475, "t_total": 0.4709, "n0": 609, "pred": "7", "correct": 0.0}
+{"id": "tv:38362", "answer": "Neal Stephenson", "exit_layer": 25, "rel_flops": 0.6158, "t_prefill": 0.3525, "t_total": 0.5991, "n0": 604, "pred": "neal stephenson", "correct": 1.0}
+{"id": "tv:39442", "answer": "Toyota", "exit_layer": 21, "rel_flops": 0.5284, "t_prefill": 0.312, "t_total": 0.4352, "n0": 606, "pred": "toyota", "correct": 1.0}
+{"id": "tv:37693", "answer": "54", "exit_layer": 21, "rel_flops": 0.5276, "t_prefill": 0.3112, "t_total": 0.4945, "n0": 605, "pred": "54", "correct": 0.0}
+{"id": "tv:35607", "answer": "Graffiti", "exit_layer": 26, "rel_flops": 0.6397, "t_prefill": 0.3668, "t_total": 0.5533, "n0": 607, "pred": "graffiti", "correct": 0.0}
+{"id": "tv:38306", "answer": "Sushi", "exit_layer": 24, "rel_flops": 0.5968, "t_prefill": 0.3485, "t_total": 0.5348, "n0": 609, "pred": "sushi", "correct": 1.0}
+{"id": "tv:36525", "answer": "None", "exit_layer": 20, "rel_flops": 0.5062, "t_prefill": 0.297, "t_total": 0.3592, "n0": 606, "pred": "none", "correct": 0.0}
+{"id": "tv:38497", "answer": "Yellow", "exit_layer": null, "rel_flops": 0.7735, "t_prefill": 0.4414, "t_total": 0.5665, "n0": 610, "pred": "yellow", "correct": 0.0}
+{"id": "tv:35812", "answer": "No", "exit_layer": 18, "rel_flops": 0.4637, "t_prefill": 0.2847, "t_total": 0.3463, "n0": 608, "pred": "no", "correct": 0.0}
+{"id": "tv:37763", "answer": "100", "exit_layer": 20, "rel_flops": 0.507, "t_prefill": 0.2955, "t_total": 0.5414, "n0": 607, "pred": "100", "correct": 0.0}
+{"id": "tv:34991", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4398, "t_prefill": 0.271, "t_total": 0.3329, "n0": 606, "pred": "yes", "correct": 1.0}
+{"id": "tv:36049", "answer": "Red", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3201, "t_total": 0.3833, "n0": 607, "pred": "red", "correct": 0.0}
+{"id": "tv:38835", "answer": "Adidas", "exit_layer": 26, "rel_flops": 0.6437, "t_prefill": 0.3798, "t_total": 0.5056, "n0": 614, "pred": "adidas", "correct": 0.0}
+{"id": "tv:36895", "answer": "Maharaja", "exit_layer": 24, "rel_flops": 0.5968, "t_prefill": 0.3515, "t_total": 0.535, "n0": 609, "pred": "maharaja", "correct": 0.0}
+{"id": "tv:35593", "answer": "Kites", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4415, "t_total": 0.5869, "n0": 607, "pred": "kites", "correct": 1.0}
+{"id": "tv:38916", "answer": "Coca cola", "exit_layer": 23, "rel_flops": 0.5754, "t_prefill": 0.3397, "t_total": 0.5852, "n0": 610, "pred": "coca cola", "correct": 1.0}
+{"id": "tv:37907", "answer": "Welcome to jersey", "exit_layer": 22, "rel_flops": 0.5505, "t_prefill": 0.3251, "t_total": 0.6335, "n0": 606, "pred": "welcome to jersey", "correct": 1.0}
+{"id": "tv:38787", "answer": "Giants", "exit_layer": 24, "rel_flops": 0.5968, "t_prefill": 0.353, "t_total": 0.4774, "n0": 609, "pred": "giants", "correct": 0.0}
+{"id": "tv:38884", "answer": "Quebec", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.4438, "t_total": 0.5086, "n0": 609, "pred": "quebec", "correct": 1.0}
+{"id": "tv:39459", "answer": "Airtouch", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.4451, "t_total": 0.5703, "n0": 611, "pred": "airtouch", "correct": 1.0}
+{"id": "tv:38434", "answer": "Watch website", "exit_layer": 20, "rel_flops": 0.5109, "t_prefill": 0.3023, "t_total": 0.4251, "n0": 612, "pred": "watch website", "correct": 0.0}
+{"id": "tv:36583", "answer": "Middle", "exit_layer": 28, "rel_flops": 0.6839, "t_prefill": 0.3921, "t_total": 0.455, "n0": 607, "pred": "middle", "correct": 0.0}
+{"id": "tv:35221", "answer": "Canon", "exit_layer": 23, "rel_flops": 0.5727, "t_prefill": 0.3335, "t_total": 0.4579, "n0": 606, "pred": "canon", "correct": 1.0}
+{"id": "tv:37439", "answer": "Basketball", "exit_layer": 27, "rel_flops": 0.6618, "t_prefill": 0.386, "t_total": 0.4488, "n0": 607, "pred": "basketball", "correct": 0.0}
+{"id": "tv:35490", "answer": "Casio", "exit_layer": 23, "rel_flops": 0.5734, "t_prefill": 0.3331, "t_total": 0.4561, "n0": 607, "pred": "casio", "correct": 1.0}
+{"id": "tv:37477", "answer": "Yes", "exit_layer": 19, "rel_flops": 0.4882, "t_prefill": 0.2863, "t_total": 0.349, "n0": 611, "pred": "yes", "correct": 1.0}
+{"id": "tv:37978", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4398, "t_prefill": 0.2716, "t_total": 0.3333, "n0": 606, "pred": "yes", "correct": 1.0}
+{"id": "tv:36486", "answer": "Citizen", "exit_layer": null, "rel_flops": 0.7717, "t_prefill": 0.4416, "t_total": 0.5662, "n0": 605, "pred": "citizen", "correct": 1.0}
+{"id": "tv:36257", "answer": "379.99", "exit_layer": 20, "rel_flops": 0.5078, "t_prefill": 0.2968, "t_total": 0.7242, "n0": 608, "pred": "37999", "correct": 0.0}
+{"id": "tv:38953", "answer": "1", "exit_layer": 25, "rel_flops": 0.6158, "t_prefill": 0.3596, "t_total": 0.4835, "n0": 604, "pred": "1", "correct": 0.0}
+{"id": "tv:39075", "answer": "Lg", "exit_layer": 25, "rel_flops": 0.617, "t_prefill": 0.3614, "t_total": 0.4847, "n0": 606, "pred": "lg", "correct": 1.0}
+{"id": "tv:39019", "answer": "Left", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4418, "t_total": 0.5057, "n0": 606, "pred": "left", "correct": 1.0}
+{"id": "tv:38274", "answer": "Samsung", "exit_layer": 24, "rel_flops": 0.5935, "t_prefill": 0.3489, "t_total": 0.4741, "n0": 604, "pred": "samsung", "correct": 1.0}
+{"id": "tv:35219", "answer": "Sanpelligrino", "exit_layer": 26, "rel_flops": 0.6386, "t_prefill": 0.3768, "t_total": 0.7117, "n0": 605, "pred": "sanpelligrino", "correct": 0.0}
+{"id": "tv:39579", "answer": "None", "exit_layer": 20, "rel_flops": 0.507, "t_prefill": 0.2953, "t_total": 0.3576, "n0": 607, "pred": "none", "correct": 0.0}
+{"id": "tv:35158", "answer": "Wiggle", "exit_layer": 24, "rel_flops": 0.5955, "t_prefill": 0.349, "t_total": 0.5335, "n0": 607, "pred": "wiggle", "correct": 1.0}
+{"id": "tv:38843", "answer": "Pale ale", "exit_layer": 25, "rel_flops": 0.6182, "t_prefill": 0.3581, "t_total": 0.4815, "n0": 608, "pred": "pale ale", "correct": 1.0}
+{"id": "tv:38352", "answer": "Rum", "exit_layer": 22, "rel_flops": 0.5534, "t_prefill": 0.3244, "t_total": 0.3877, "n0": 610, "pred": "rum", "correct": 1.0}
+{"id": "tv:38086", "answer": "Street", "exit_layer": 24, "rel_flops": 0.5948, "t_prefill": 0.3483, "t_total": 0.4112, "n0": 606, "pred": "street", "correct": 0.0}
+{"id": "tv:38959", "answer": "9/11", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.4442, "t_total": 0.7552, "n0": 609, "pred": "911", "correct": 1.0}
+{"id": "tv:37868", "answer": "Dunlop", "exit_layer": 23, "rel_flops": 0.572, "t_prefill": 0.3322, "t_total": 0.4566, "n0": 605, "pred": "dunlop", "correct": 1.0}
+{"id": "tv:36898", "answer": "Webconverge", "exit_layer": 23, "rel_flops": 0.5754, "t_prefill": 0.3398, "t_total": 0.5856, "n0": 610, "pred": "webconverge", "correct": 1.0}
+{"id": "tv:34768", "answer": "Code veronica", "exit_layer": 23, "rel_flops": 0.572, "t_prefill": 0.331, "t_total": 0.5143, "n0": 605, "pred": "code veronica", "correct": 1.0}
+{"id": "tv:36413", "answer": "Alcohol", "exit_layer": 23, "rel_flops": 0.572, "t_prefill": 0.3303, "t_total": 0.5164, "n0": 605, "pred": "alcohol", "correct": 0.0}
+{"id": "tv:35387", "answer": "2013", "exit_layer": null, "rel_flops": 0.7717, "t_prefill": 0.4393, "t_total": 0.749, "n0": 605, "pred": "2013", "correct": 0.3333333333333333}
+{"id": "tv:37166", "answer": "No one", "exit_layer": null, "rel_flops": 0.7709, "t_prefill": 0.4333, "t_total": 0.5588, "n0": 603, "pred": "no one", "correct": 0.0}
+{"id": "tv:35048", "answer": "Elf", "exit_layer": 26, "rel_flops": 0.6397, "t_prefill": 0.37, "t_total": 0.494, "n0": 607, "pred": "elf", "correct": 0.0}
+{"id": "tv:35150", "answer": "12:00", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4373, "t_total": 0.812, "n0": 607, "pred": "1200", "correct": 0.0}
+{"id": "tv:34735", "answer": "London cabspot", "exit_layer": 28, "rel_flops": 0.6849, "t_prefill": 0.4006, "t_total": 0.5871, "n0": 609, "pred": "london cabspot", "correct": 0.0}
+{"id": "tv:34762", "answer": "Yes", "exit_layer": 18, "rel_flops": 0.4628, "t_prefill": 0.2769, "t_total": 0.3391, "n0": 607, "pred": "yes", "correct": 1.0}
+{"id": "tv:39320", "answer": "Klang", "exit_layer": 22, "rel_flops": 0.5505, "t_prefill": 0.3246, "t_total": 0.4492, "n0": 606, "pred": "klang", "correct": 0.0}
+{"id": "tv:39499", "answer": "Mess", "exit_layer": 24, "rel_flops": 0.5948, "t_prefill": 0.3492, "t_total": 0.4261, "n0": 606, "pred": "mess", "correct": 1.0}
+{"id": "tv:38515", "answer": "15", "exit_layer": 21, "rel_flops": 0.5269, "t_prefill": 0.3083, "t_total": 0.4915, "n0": 604, "pred": "15", "correct": 1.0}
+{"id": "tv:37014", "answer": "Coca cola", "exit_layer": 24, "rel_flops": 0.5974, "t_prefill": 0.3528, "t_total": 0.6003, "n0": 610, "pred": "coca cola", "correct": 1.0}
+{"id": "tv:38871", "answer": "Family private", "exit_layer": 23, "rel_flops": 0.5734, "t_prefill": 0.3342, "t_total": 0.458, "n0": 607, "pred": "family private", "correct": 0.0}
+{"id": "tv:37175", "answer": "19", "exit_layer": 21, "rel_flops": 0.5306, "t_prefill": 0.3068, "t_total": 0.4903, "n0": 609, "pred": "19", "correct": 1.0}
+{"id": "tv:38239", "answer": "Pushover", "exit_layer": 26, "rel_flops": 0.6431, "t_prefill": 0.3723, "t_total": 0.5585, "n0": 613, "pred": "pushover", "correct": 1.0}
+{"id": "tv:37519", "answer": "Nuts", "exit_layer": 24, "rel_flops": 0.5955, "t_prefill": 0.3473, "t_total": 0.473, "n0": 607, "pred": "nuts", "correct": 0.0}
+{"id": "tv:36902", "answer": "Trash", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3246, "t_total": 0.4472, "n0": 607, "pred": "trash", "correct": 0.0}
+{"id": "tv:37126", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4442, "t_prefill": 0.2716, "t_total": 0.3331, "n0": 611, "pred": "yes", "correct": 1.0}
+{"id": "tv:36281", "answer": "Kitchen", "exit_layer": 25, "rel_flops": 0.6164, "t_prefill": 0.3667, "t_total": 0.4902, "n0": 605, "pred": "kitchen", "correct": 0.0}
+{"id": "tv:36326", "answer": "Power", "exit_layer": 20, "rel_flops": 0.5102, "t_prefill": 0.2945, "t_total": 0.3571, "n0": 611, "pred": "power", "correct": 0.0}
+{"id": "tv:37778", "answer": "D. H. Lawrence", "exit_layer": 28, "rel_flops": 0.6839, "t_prefill": 0.3996, "t_total": 0.7063, "n0": 607, "pred": "d h lawrence", "correct": 0.3333333333333333}
+{"id": "tv:37496", "answer": "Shoegasm", "exit_layer": 24, "rel_flops": 0.5955, "t_prefill": 0.3471, "t_total": 0.5312, "n0": 607, "pred": "shoegasm", "correct": 1.0}
+{"id": "tv:36020", "answer": "Touch control", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.3485, "t_total": 0.4725, "n0": 605, "pred": "touch control", "correct": 1.0}
+{"id": "tv:35376", "answer": "Beacon lighting", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4402, "t_total": 0.6881, "n0": 607, "pred": "beacon lighting", "correct": 1.0}
+{"id": "tv:35684", "answer": "River rock casino", "exit_layer": 23, "rel_flops": 0.5774, "t_prefill": 0.3339, "t_total": 0.5807, "n0": 613, "pred": "river rock casino", "correct": 1.0}
+{"id": "tv:36706", "answer": "Coffee", "exit_layer": 26, "rel_flops": 0.6391, "t_prefill": 0.3695, "t_total": 0.5552, "n0": 606, "pred": "coffee", "correct": 0.0}
+{"id": "tv:36280", "answer": "Phone", "exit_layer": 22, "rel_flops": 0.5548, "t_prefill": 0.3237, "t_total": 0.3881, "n0": 612, "pred": "phone", "correct": 1.0}
+{"id": "tv:37543", "answer": "39", "exit_layer": 21, "rel_flops": 0.5276, "t_prefill": 0.3088, "t_total": 0.4942, "n0": 605, "pred": "39", "correct": 0.0}
+{"id": "tv:38017", "answer": "Apple", "exit_layer": 28, "rel_flops": 0.6834, "t_prefill": 0.3942, "t_total": 0.4774, "n0": 606, "pred": "apple", "correct": 0.0}
+{"id": "tv:37340", "answer": "Yes", "exit_layer": 19, "rel_flops": 0.4866, "t_prefill": 0.2836, "t_total": 0.3457, "n0": 609, "pred": "yes", "correct": 1.0}
+{"id": "tv:39322", "answer": "Pizza", "exit_layer": 22, "rel_flops": 0.5498, "t_prefill": 0.3219, "t_total": 0.4458, "n0": 605, "pred": "pizza", "correct": 0.0}
+{"id": "tv:36433", "answer": "Beer", "exit_layer": 24, "rel_flops": 0.5968, "t_prefill": 0.3536, "t_total": 0.4776, "n0": 609, "pred": "beer", "correct": 0.3333333333333333}
+{"id": "tv:35135", "answer": "A Martian Odyssey", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.3457, "t_total": 0.7115, "n0": 605, "pred": "martian odyssey", "correct": 1.0}
+{"id": "tv:38954", "answer": "German", "exit_layer": null, "rel_flops": 0.7756, "t_prefill": 0.445, "t_total": 0.5091, "n0": 616, "pred": "german", "correct": 0.0}
+{"id": "tv:38706", "answer": "Sea", "exit_layer": 22, "rel_flops": 0.5505, "t_prefill": 0.3235, "t_total": 0.3864, "n0": 606, "pred": "sea", "correct": 1.0}
+{"id": "tv:37591", "answer": "Fly emirates", "exit_layer": 26, "rel_flops": 0.6397, "t_prefill": 0.3714, "t_total": 0.6165, "n0": 607, "pred": "fly emirates", "correct": 1.0}
+{"id": "tv:38277", "answer": "Mikkell", "exit_layer": 25, "rel_flops": 0.6164, "t_prefill": 0.3548, "t_total": 0.5442, "n0": 605, "pred": "mikkell", "correct": 1.0}
+{"id": "tv:38032", "answer": "Weird", "exit_layer": 27, "rel_flops": 0.6645, "t_prefill": 0.3878, "t_total": 0.5113, "n0": 612, "pred": "weird", "correct": 1.0}
+{"id": "tv:39211", "answer": "XYZ", "exit_layer": 23, "rel_flops": 0.5741, "t_prefill": 0.3427, "t_total": 0.5275, "n0": 608, "pred": "xyz", "correct": 0.0}
+{"id": "tv:37941", "answer": "Auditorium", "exit_layer": 25, "rel_flops": 0.6182, "t_prefill": 0.361, "t_total": 0.546, "n0": 608, "pred": "auditorium", "correct": 1.0}
+{"id": "tv:36334", "answer": "34", "exit_layer": null, "rel_flops": 0.7717, "t_prefill": 0.437, "t_total": 0.6249, "n0": 605, "pred": "34", "correct": 0.0}
+{"id": "tv:36958", "answer": "Vegetables", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4396, "t_total": 0.627, "n0": 608, "pred": "vegetables", "correct": 0.0}
+{"id": "tv:34884", "answer": "Bitcoin", "exit_layer": 22, "rel_flops": 0.5555, "t_prefill": 0.3242, "t_total": 0.5092, "n0": 613, "pred": "bitcoin", "correct": 1.0}
+{"id": "tv:34786", "answer": "Tapiz", "exit_layer": 21, "rel_flops": 0.5269, "t_prefill": 0.3146, "t_total": 0.4994, "n0": 604, "pred": "tapiz", "correct": 1.0}
+{"id": "tv:36866", "answer": "George inn", "exit_layer": 28, "rel_flops": 0.6839, "t_prefill": 0.3981, "t_total": 0.522, "n0": 607, "pred": "george inn", "correct": 0.0}
+{"id": "tv:39060", "answer": "None", "exit_layer": 20, "rel_flops": 0.5078, "t_prefill": 0.2964, "t_total": 0.3587, "n0": 608, "pred": "none", "correct": 0.0}
+{"id": "tv:36818", "answer": "Wells fargo", "exit_layer": 25, "rel_flops": 0.617, "t_prefill": 0.3555, "t_total": 0.6034, "n0": 606, "pred": "wells fargo", "correct": 1.0}
+{"id": "tv:34868", "answer": "Kicker", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4425, "t_total": 0.5687, "n0": 606, "pred": "kicker", "correct": 1.0}
+{"id": "tv:37772", "answer": "No", "exit_layer": 20, "rel_flops": 0.5094, "t_prefill": 0.3001, "t_total": 0.3626, "n0": 610, "pred": "no", "correct": 0.0}
+{"id": "tv:35912", "answer": "Ernest Hemingway", "exit_layer": 27, "rel_flops": 0.6602, "t_prefill": 0.3802, "t_total": 0.6281, "n0": 604, "pred": "ernest hemingway", "correct": 0.6666666666666666}
+{"id": "tv:34628", "answer": "Willis", "exit_layer": 26, "rel_flops": 0.6414, "t_prefill": 0.3759, "t_total": 0.4998, "n0": 610, "pred": "willis", "correct": 1.0}
+{"id": "tv:36474", "answer": "1.99", "exit_layer": 20, "rel_flops": 0.507, "t_prefill": 0.2986, "t_total": 0.6044, "n0": 607, "pred": "199", "correct": 0.0}
+{"id": "tv:38290", "answer": "12:00", "exit_layer": 18, "rel_flops": 0.4628, "t_prefill": 0.2808, "t_total": 0.6467, "n0": 607, "pred": "1200", "correct": 0.0}
+{"id": "tv:38527", "answer": "Reebok", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4336, "t_total": 0.6211, "n0": 606, "pred": "reebok", "correct": 1.0}
+{"id": "tv:35642", "answer": "Yes", "exit_layer": 19, "rel_flops": 0.4849, "t_prefill": 0.2851, "t_total": 0.3468, "n0": 607, "pred": "yes", "correct": 0.0}
+{"id": "tv:34726", "answer": "Art", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3239, "t_total": 0.3862, "n0": 607, "pred": "art", "correct": 0.0}
+{"id": "tv:35380", "answer": "Iphone", "exit_layer": 16, "rel_flops": 0.4176, "t_prefill": 0.2653, "t_total": 0.3894, "n0": 606, "pred": "iphone", "correct": 0.0}
+{"id": "tv:38669", "answer": "On", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.4428, "t_total": 0.5067, "n0": 609, "pred": "on", "correct": 0.0}
+{"id": "tv:35193", "answer": "Lee", "exit_layer": 23, "rel_flops": 0.5761, "t_prefill": 0.3352, "t_total": 0.3983, "n0": 611, "pred": "lee", "correct": 0.0}
+{"id": "tv:36475", "answer": "Blue label", "exit_layer": 23, "rel_flops": 0.5754, "t_prefill": 0.334, "t_total": 0.458, "n0": 610, "pred": "blue label", "correct": 1.0}
+{"id": "tv:34739", "answer": "Dom", "exit_layer": 23, "rel_flops": 0.5747, "t_prefill": 0.3417, "t_total": 0.404, "n0": 609, "pred": "dom", "correct": 0.0}
+{"id": "tv:38729", "answer": "Fire", "exit_layer": 23, "rel_flops": 0.5727, "t_prefill": 0.3326, "t_total": 0.3946, "n0": 606, "pred": "fire", "correct": 0.0}
+{"id": "tv:36319", "answer": "Pacific", "exit_layer": 24, "rel_flops": 0.5961, "t_prefill": 0.348, "t_total": 0.4105, "n0": 608, "pred": "pacific", "correct": 0.0}
+{"id": "tv:34899", "answer": "Natan", "exit_layer": 28, "rel_flops": 0.6824, "t_prefill": 0.3961, "t_total": 0.5196, "n0": 604, "pred": "natan", "correct": 1.0}
+{"id": "tv:39152", "answer": "Scotland", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3264, "t_total": 0.3883, "n0": 607, "pred": "scotland", "correct": 1.0}
+{"id": "tv:37835", "answer": "1", "exit_layer": 22, "rel_flops": 0.5562, "t_prefill": 0.3249, "t_total": 0.448, "n0": 614, "pred": "1", "correct": 0.0}
+{"id": "tv:38689", "answer": "2013", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4333, "t_total": 0.7587, "n0": 608, "pred": "2013", "correct": 1.0}
+{"id": "tv:36339", "answer": "Xmen", "exit_layer": 26, "rel_flops": 0.6397, "t_prefill": 0.3791, "t_total": 0.5024, "n0": 607, "pred": "xmen", "correct": 1.0}
+{"id": "tv:35117", "answer": "Terrace", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4398, "t_total": 0.5662, "n0": 608, "pred": "terrace", "correct": 1.0}
+{"id": "tv:37354", "answer": "King of bottled beers", "exit_layer": 23, "rel_flops": 0.5754, "t_prefill": 0.3375, "t_total": 0.7052, "n0": 610, "pred": "king of bottled beers", "correct": 1.0}
+{"id": "tv:38692", "answer": "Orange", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.446, "t_total": 0.5099, "n0": 611, "pred": "orange", "correct": 1.0}
+{"id": "tv:35328", "answer": "Edible arrangements", "exit_layer": 26, "rel_flops": 0.6414, "t_prefill": 0.3717, "t_total": 0.6177, "n0": 610, "pred": "edible arrangements", "correct": 1.0}
+{"id": "tv:39016", "answer": "50", "exit_layer": 24, "rel_flops": 0.5955, "t_prefill": 0.3438, "t_total": 0.5275, "n0": 607, "pred": "50", "correct": 0.0}
+{"id": "tv:38202", "answer": "Regza", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4323, "t_total": 0.559, "n0": 606, "pred": "regza", "correct": 1.0}
+{"id": "tv:38036", "answer": "2013", "exit_layer": 23, "rel_flops": 0.5713, "t_prefill": 0.338, "t_total": 0.6451, "n0": 604, "pred": "2013", "correct": 0.0}
+{"id": "tv:36502", "answer": "7", "exit_layer": 28, "rel_flops": 0.6844, "t_prefill": 0.3946, "t_total": 0.5187, "n0": 608, "pred": "7", "correct": 1.0}
+{"id": "tv:35472", "answer": "Math", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4441, "t_total": 0.5084, "n0": 606, "pred": "math", "correct": 0.0}
+{"id": "tv:35885", "answer": "Wwwassistcom", "exit_layer": 19, "rel_flops": 0.4849, "t_prefill": 0.2919, "t_total": 0.598, "n0": 607, "pred": "wwwassistcom", "correct": 0.0}
+{"id": "tv:37321", "answer": "Samsung", "exit_layer": 24, "rel_flops": 0.5968, "t_prefill": 0.3499, "t_total": 0.4732, "n0": 609, "pred": "samsung", "correct": 1.0}
+{"id": "tv:35443", "answer": "T-1", "exit_layer": null, "rel_flops": 0.7713, "t_prefill": 0.4359, "t_total": 0.6226, "n0": 604, "pred": "t1", "correct": 0.0}
+{"id": "tv:35821", "answer": "Large", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4412, "t_total": 0.5659, "n0": 606, "pred": "large", "correct": 0.0}
+{"id": "tv:35994", "answer": "Lorina", "exit_layer": 26, "rel_flops": 0.6391, "t_prefill": 0.3707, "t_total": 0.4943, "n0": 606, "pred": "lorina", "correct": 1.0}
+{"id": "tv:35288", "answer": "1st", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4408, "t_total": 0.6303, "n0": 608, "pred": "1st", "correct": 0.0}
+{"id": "tv:36243", "answer": "Pale ale", "exit_layer": 24, "rel_flops": 0.5955, "t_prefill": 0.3546, "t_total": 0.4788, "n0": 607, "pred": "pale ale", "correct": 0.6666666666666666}
+{"id": "tv:36255", "answer": "M22", "exit_layer": 30, "rel_flops": 0.7295, "t_prefill": 0.4241, "t_total": 0.6095, "n0": 610, "pred": "m22", "correct": 0.0}
+{"id": "tv:35235", "answer": "Happy", "exit_layer": null, "rel_flops": 0.7746, "t_prefill": 0.4433, "t_total": 0.5067, "n0": 613, "pred": "happy", "correct": 0.0}
+{"id": "tv:37113", "answer": "Acqua di gioia", "exit_layer": 20, "rel_flops": 0.5078, "t_prefill": 0.2977, "t_total": 0.6631, "n0": 608, "pred": "acqua di gioia", "correct": 0.0}
+{"id": "tv:35716", "answer": "Stop", "exit_layer": 24, "rel_flops": 0.5948, "t_prefill": 0.352, "t_total": 0.414, "n0": 606, "pred": "stop", "correct": 1.0}
+{"id": "tv:36511", "answer": "Blue jays", "exit_layer": 27, "rel_flops": 0.6629, "t_prefill": 0.3812, "t_total": 0.5689, "n0": 609, "pred": "blue jays", "correct": 0.3333333333333333}
+{"id": "tv:37518", "answer": "Nuts", "exit_layer": 25, "rel_flops": 0.6164, "t_prefill": 0.3615, "t_total": 0.486, "n0": 605, "pred": "nuts", "correct": 1.0}
+{"id": "tv:35851", "answer": "Cdv", "exit_layer": 25, "rel_flops": 0.6188, "t_prefill": 0.3577, "t_total": 0.5416, "n0": 609, "pred": "cdv", "correct": 0.0}
+{"id": "tv:39438", "answer": "Pizza", "exit_layer": 27, "rel_flops": 0.665, "t_prefill": 0.3879, "t_total": 0.5127, "n0": 613, "pred": "pizza", "correct": 0.0}
+{"id": "tv:36416", "answer": "13", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.4453, "t_total": 0.6316, "n0": 609, "pred": "13", "correct": 0.0}
+{"id": "tv:35680", "answer": "123", "exit_layer": null, "rel_flops": 0.7717, "t_prefill": 0.4483, "t_total": 0.6986, "n0": 605, "pred": "123", "correct": 0.0}
+{"id": "tv:36373", "answer": "3", "exit_layer": 24, "rel_flops": 0.5981, "t_prefill": 0.354, "t_total": 0.477, "n0": 611, "pred": "3", "correct": 1.0}
+{"id": "tv:38331", "answer": "27", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.441, "t_total": 0.6295, "n0": 609, "pred": "27", "correct": 1.0}
+{"id": "tv:36096", "answer": "New york", "exit_layer": 26, "rel_flops": 0.6391, "t_prefill": 0.3748, "t_total": 0.5628, "n0": 606, "pred": "new york", "correct": 1.0}
+{"id": "tv:36617", "answer": "Cruelty", "exit_layer": 26, "rel_flops": 0.6391, "t_prefill": 0.3719, "t_total": 0.5591, "n0": 606, "pred": "cruelty", "correct": 0.0}
+{"id": "tv:35313", "answer": "Fruit", "exit_layer": 27, "rel_flops": 0.6618, "t_prefill": 0.3824, "t_total": 0.5075, "n0": 607, "pred": "fruit", "correct": 0.0}
+{"id": "tv:38556", "answer": "BAH HUMBUG", "exit_layer": 23, "rel_flops": 0.5727, "t_prefill": 0.3418, "t_total": 0.7078, "n0": 606, "pred": "bah humbug", "correct": 1.0}
+{"id": "tv:37883", "answer": "27", "exit_layer": null, "rel_flops": 0.7735, "t_prefill": 0.4358, "t_total": 0.6415, "n0": 610, "pred": "27", "correct": 0.0}
+{"id": "tv:39221", "answer": "55", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4424, "t_total": 0.6284, "n0": 608, "pred": "55", "correct": 1.0}
+{"id": "tv:34772", "answer": "Sttgrt", "exit_layer": 28, "rel_flops": 0.6849, "t_prefill": 0.3949, "t_total": 0.6403, "n0": 609, "pred": "sttgrt", "correct": 0.0}
+{"id": "tv:35938", "answer": "11", "exit_layer": 26, "rel_flops": 0.6409, "t_prefill": 0.3692, "t_total": 0.5553, "n0": 609, "pred": "11", "correct": 0.0}
+{"id": "tv:38118", "answer": "Accu-rite", "exit_layer": 25, "rel_flops": 0.6176, "t_prefill": 0.3594, "t_total": 0.608, "n0": 607, "pred": "accurite", "correct": 0.0}
+{"id": "tv:37178", "answer": "9:19", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4425, "t_total": 0.7532, "n0": 606, "pred": "919", "correct": 0.0}
+{"id": "tv:39457", "answer": "Better homes and gardens", "exit_layer": 28, "rel_flops": 0.6864, "t_prefill": 0.3991, "t_total": 0.7101, "n0": 612, "pred": "better homes and gardens", "correct": 0.0}
+{"id": "tv:36955", "answer": "No", "exit_layer": 20, "rel_flops": 0.5062, "t_prefill": 0.2961, "t_total": 0.358, "n0": 606, "pred": "no", "correct": 1.0}
+{"id": "tv:37964", "answer": "Cebu ferries", "exit_layer": 24, "rel_flops": 0.5961, "t_prefill": 0.3491, "t_total": 0.6557, "n0": 608, "pred": "cebu ferries", "correct": 1.0}
+{"id": "tv:38010", "answer": "Cargo", "exit_layer": 27, "rel_flops": 0.6629, "t_prefill": 0.3833, "t_total": 0.5071, "n0": 609, "pred": "cargo", "correct": 1.0}
+{"id": "tv:35174", "answer": "Auto service experts", "exit_layer": 23, "rel_flops": 0.5734, "t_prefill": 0.3327, "t_total": 0.578, "n0": 607, "pred": "auto service experts", "correct": 0.6666666666666666}
+{"id": "tv:38380", "answer": "5", "exit_layer": 20, "rel_flops": 0.5047, "t_prefill": 0.2947, "t_total": 0.4192, "n0": 604, "pred": "5", "correct": 1.0}
+{"id": "tv:36189", "answer": "1-800-555", "exit_layer": 23, "rel_flops": 0.5754, "t_prefill": 0.3337, "t_total": 0.8835, "n0": 610, "pred": "1800555", "correct": 0.0}
+{"id": "tv:35978", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4389, "t_prefill": 0.2739, "t_total": 0.3355, "n0": 605, "pred": "yes", "correct": 1.0}
+{"id": "tv:37660", "answer": "Florida", "exit_layer": 22, "rel_flops": 0.552, "t_prefill": 0.3257, "t_total": 0.3899, "n0": 608, "pred": "florida", "correct": 1.0}
+{"id": "tv:39470", "answer": "Beer", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4405, "t_total": 0.5656, "n0": 606, "pred": "beer", "correct": 0.0}
+{"id": "tv:39110", "answer": "Steak", "exit_layer": 22, "rel_flops": 0.5555, "t_prefill": 0.3264, "t_total": 0.4494, "n0": 613, "pred": "steak", "correct": 1.0}
+{"id": "tv:37914", "answer": "Ozeri", "exit_layer": 23, "rel_flops": 0.5727, "t_prefill": 0.3324, "t_total": 0.518, "n0": 606, "pred": "ozeri", "correct": 1.0}
+{"id": "tv:37576", "answer": "Mets", "exit_layer": 27, "rel_flops": 0.6629, "t_prefill": 0.3921, "t_total": 0.5169, "n0": 609, "pred": "mets", "correct": 0.3333333333333333}
+{"id": "tv:36544", "answer": "Espresso", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3242, "t_total": 0.5074, "n0": 607, "pred": "espresso", "correct": 1.0}
+{"id": "tv:36693", "answer": "Ryuu", "exit_layer": 25, "rel_flops": 0.6176, "t_prefill": 0.3592, "t_total": 0.5451, "n0": 607, "pred": "ryuu", "correct": 1.0}
+{"id": "tv:36508", "answer": "10", "exit_layer": null, "rel_flops": 0.7735, "t_prefill": 0.4389, "t_total": 0.6287, "n0": 610, "pred": "10", "correct": 0.0}
+{"id": "tv:38280", "answer": "2013", "exit_layer": 26, "rel_flops": 0.6397, "t_prefill": 0.3732, "t_total": 0.6813, "n0": 607, "pred": "2013", "correct": 1.0}
+{"id": "tv:38119", "answer": "19/04/200", "exit_layer": 26, "rel_flops": 0.6397, "t_prefill": 0.3709, "t_total": 0.9221, "n0": 607, "pred": "1904200", "correct": 0.0}
+{"id": "tv:35121", "answer": "2013", "exit_layer": 30, "rel_flops": 0.7277, "t_prefill": 0.4257, "t_total": 0.735, "n0": 606, "pred": "2013", "correct": 1.0}
+{"id": "tv:36521", "answer": "Chatter", "exit_layer": 26, "rel_flops": 0.6391, "t_prefill": 0.3707, "t_total": 0.4954, "n0": 606, "pred": "chatter", "correct": 1.0}
+{"id": "tv:35456", "answer": "Get a lot", "exit_layer": 27, "rel_flops": 0.6618, "t_prefill": 0.3836, "t_total": 0.5685, "n0": 607, "pred": "get lot", "correct": 0.0}
+{"id": "tv:35596", "answer": "Stout", "exit_layer": 24, "rel_flops": 0.5981, "t_prefill": 0.3447, "t_total": 0.4677, "n0": 611, "pred": "stout", "correct": 0.0}
+{"id": "tv:35628", "answer": "1", "exit_layer": 20, "rel_flops": 0.5125, "t_prefill": 0.2983, "t_total": 0.4225, "n0": 614, "pred": "1", "correct": 0.0}
+{"id": "tv:39031", "answer": "Look", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.4453, "t_total": 0.5095, "n0": 609, "pred": "look", "correct": 0.0}
+{"id": "tv:36009", "answer": "2.99", "exit_layer": 20, "rel_flops": 0.5062, "t_prefill": 0.2967, "t_total": 0.6022, "n0": 606, "pred": "299", "correct": 0.0}
+{"id": "tv:37925", "answer": "Vote", "exit_layer": 24, "rel_flops": 0.6006, "t_prefill": 0.3499, "t_total": 0.4749, "n0": 615, "pred": "vote", "correct": 0.3333333333333333}
+{"id": "tv:38435", "answer": "Citizen", "exit_layer": 25, "rel_flops": 0.6176, "t_prefill": 0.3619, "t_total": 0.4853, "n0": 607, "pred": "citizen", "correct": 0.0}
+{"id": "tv:37413", "answer": "86", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.3475, "t_total": 0.5345, "n0": 605, "pred": "86", "correct": 0.0}
+{"id": "tv:35555", "answer": "Who is a professor", "exit_layer": 23, "rel_flops": 0.5768, "t_prefill": 0.3375, "t_total": 0.6072, "n0": 612, "pred": "who is professor", "correct": 0.0}
+{"id": "tv:38905", "answer": "Alkali", "exit_layer": null, "rel_flops": 0.7735, "t_prefill": 0.4378, "t_total": 0.6236, "n0": 610, "pred": "alkali", "correct": 0.0}
+{"id": "tv:36500", "answer": "Yes", "exit_layer": 19, "rel_flops": 0.4849, "t_prefill": 0.2881, "t_total": 0.3502, "n0": 607, "pred": "yes", "correct": 1.0}
+{"id": "tv:37963", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4398, "t_prefill": 0.2668, "t_total": 0.3283, "n0": 606, "pred": "yes", "correct": 0.3333333333333333}
+{"id": "tv:38536", "answer": "Wwwfamimacom", "exit_layer": 19, "rel_flops": 0.4857, "t_prefill": 0.29, "t_total": 0.6566, "n0": 608, "pred": "wwwfamimacom", "correct": 0.0}
+{"id": "tv:38448", "answer": "5", "exit_layer": 21, "rel_flops": 0.5306, "t_prefill": 0.3099, "t_total": 0.4339, "n0": 609, "pred": "5", "correct": 1.0}
+{"id": "tv:36690", "answer": "Tour", "exit_layer": 22, "rel_flops": 0.5505, "t_prefill": 0.3289, "t_total": 0.3915, "n0": 606, "pred": "tour", "correct": 0.6666666666666666}
+{"id": "tv:37325", "answer": "2", "exit_layer": 21, "rel_flops": 0.5284, "t_prefill": 0.3094, "t_total": 0.4329, "n0": 606, "pred": "2", "correct": 1.0}
+{"id": "tv:38369", "answer": "I", "exit_layer": 30, "rel_flops": 0.7286, "t_prefill": 0.4186, "t_total": 0.4815, "n0": 608, "pred": "i", "correct": 1.0}
+{"id": "tv:36749", "answer": "1", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4353, "t_total": 0.5642, "n0": 608, "pred": "1", "correct": 1.0}
+{"id": "tv:36987", "answer": "Dvd", "exit_layer": 22, "rel_flops": 0.552, "t_prefill": 0.3221, "t_total": 0.4475, "n0": 608, "pred": "dvd", "correct": 0.0}
+{"id": "tv:37390", "answer": "Bembos", "exit_layer": null, "rel_flops": 0.7713, "t_prefill": 0.436, "t_total": 0.623, "n0": 604, "pred": "bembos", "correct": 1.0}
+{"id": "tv:37127", "answer": "Jose constantza", "exit_layer": 27, "rel_flops": 0.665, "t_prefill": 0.381, "t_total": 0.567, "n0": 613, "pred": "jose constantza", "correct": 0.0}
+{"id": "tv:39250", "answer": "7", "exit_layer": 21, "rel_flops": 0.5306, "t_prefill": 0.3086, "t_total": 0.4314, "n0": 609, "pred": "7", "correct": 1.0}
+{"id": "tv:37089", "answer": "911", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4379, "t_total": 0.6856, "n0": 608, "pred": "911", "correct": 1.0}
+{"id": "tv:35753", "answer": "40", "exit_layer": 20, "rel_flops": 0.5094, "t_prefill": 0.3024, "t_total": 0.487, "n0": 610, "pred": "40", "correct": 0.0}
+{"id": "tv:38106", "answer": "13", "exit_layer": 26, "rel_flops": 0.6403, "t_prefill": 0.3722, "t_total": 0.5565, "n0": 608, "pred": "13", "correct": 1.0}
+{"id": "tv:35190", "answer": "20", "exit_layer": 24, "rel_flops": 0.5961, "t_prefill": 0.3408, "t_total": 0.5252, "n0": 608, "pred": "20", "correct": 0.0}
+{"id": "tv:36012", "answer": "37", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.4364, "t_total": 0.6329, "n0": 611, "pred": "37", "correct": 1.0}
+{"id": "tv:34648", "answer": "10", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4444, "t_total": 0.6306, "n0": 606, "pred": "10", "correct": 0.0}
+{"id": "tv:38645", "answer": "John", "exit_layer": 24, "rel_flops": 0.5948, "t_prefill": 0.3453, "t_total": 0.4076, "n0": 606, "pred": "john", "correct": 0.0}
+{"id": "tv:37163", "answer": "10", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4387, "t_total": 0.6252, "n0": 608, "pred": "10", "correct": 0.0}
+{"id": "tv:39203", "answer": "Leap", "exit_layer": 26, "rel_flops": 0.6386, "t_prefill": 0.3671, "t_total": 0.4925, "n0": 605, "pred": "leap", "correct": 1.0}
+{"id": "tv:34922", "answer": "John H. H. Van Lennep", "exit_layer": 26, "rel_flops": 0.6397, "t_prefill": 0.3677, "t_total": 0.9202, "n0": 607, "pred": "john h h van lennep", "correct": 0.0}
+{"id": "tv:38025", "answer": "Laughter", "exit_layer": 22, "rel_flops": 0.5505, "t_prefill": 0.3217, "t_total": 0.5064, "n0": 606, "pred": "laughter", "correct": 1.0}
+{"id": "tv:39416", "answer": "Amazon", "exit_layer": 20, "rel_flops": 0.5094, "t_prefill": 0.299, "t_total": 0.3613, "n0": 610, "pred": "amazon", "correct": 0.6666666666666666}
+{"id": "tv:38697", "answer": "Box", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4376, "t_total": 0.5013, "n0": 606, "pred": "box", "correct": 0.0}
+{"id": "tv:34927", "answer": "90", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4375, "t_total": 0.624, "n0": 607, "pred": "90", "correct": 1.0}
+{"id": "tv:37069", "answer": "Rum", "exit_layer": 26, "rel_flops": 0.6437, "t_prefill": 0.3763, "t_total": 0.4389, "n0": 614, "pred": "rum", "correct": 0.0}
+{"id": "tv:37892", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4451, "t_prefill": 0.2728, "t_total": 0.3344, "n0": 612, "pred": "yes", "correct": 1.0}
+{"id": "tv:36593", "answer": "Beez neez", "exit_layer": 26, "rel_flops": 0.6403, "t_prefill": 0.3671, "t_total": 0.612, "n0": 608, "pred": "beez neez", "correct": 1.0}
+{"id": "tv:36388", "answer": "Microsoft", "exit_layer": 22, "rel_flops": 0.5498, "t_prefill": 0.3194, "t_total": 0.3815, "n0": 605, "pred": "microsoft", "correct": 0.0}
+{"id": "tv:35246", "answer": "Corona", "exit_layer": 27, "rel_flops": 0.6629, "t_prefill": 0.3849, "t_total": 0.5088, "n0": 609, "pred": "corona", "correct": 1.0}
+{"id": "tv:36766", "answer": "100", "exit_layer": 31, "rel_flops": 0.7511, "t_prefill": 0.4267, "t_total": 0.6747, "n0": 609, "pred": "100", "correct": 1.0}
+{"id": "tv:36482", "answer": "Yes", "exit_layer": 19, "rel_flops": 0.4849, "t_prefill": 0.2936, "t_total": 0.3554, "n0": 607, "pred": "yes", "correct": 1.0}
+{"id": "tv:38651", "answer": "Oktoberfest", "exit_layer": 21, "rel_flops": 0.5299, "t_prefill": 0.3104, "t_total": 0.4331, "n0": 608, "pred": "oktoberfest", "correct": 1.0}
+{"id": "tv:37605", "answer": "Adidas", "exit_layer": 24, "rel_flops": 0.5974, "t_prefill": 0.3521, "t_total": 0.4756, "n0": 610, "pred": "adidas", "correct": 1.0}
+{"id": "tv:37793", "answer": "Westjet", "exit_layer": 23, "rel_flops": 0.5747, "t_prefill": 0.3282, "t_total": 0.4518, "n0": 609, "pred": "westjet", "correct": 0.0}
+{"id": "tv:35452", "answer": "100", "exit_layer": 20, "rel_flops": 0.5109, "t_prefill": 0.2996, "t_total": 0.5431, "n0": 612, "pred": "100", "correct": 0.0}
+{"id": "tv:34805", "answer": "0", "exit_layer": null, "rel_flops": 0.7753, "t_prefill": 0.442, "t_total": 0.5668, "n0": 615, "pred": "0", "correct": 0.0}
+{"id": "tv:35829", "answer": "Vikings", "exit_layer": 21, "rel_flops": 0.5284, "t_prefill": 0.3149, "t_total": 0.4376, "n0": 606, "pred": "vikings", "correct": 1.0}
+{"id": "tv:34663", "answer": "Corona", "exit_layer": 27, "rel_flops": 0.6629, "t_prefill": 0.3842, "t_total": 0.5079, "n0": 609, "pred": "corona", "correct": 0.6666666666666666}
+{"id": "tv:36720", "answer": "Www.google.com", "exit_layer": 21, "rel_flops": 0.5276, "t_prefill": 0.3094, "t_total": 0.6762, "n0": 605, "pred": "wwwgooglecom", "correct": 0.0}
+{"id": "tv:39474", "answer": "2011", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.4422, "t_total": 0.7512, "n0": 609, "pred": "2011", "correct": 1.0}
+{"id": "tv:38865", "answer": "Fuller's", "exit_layer": 28, "rel_flops": 0.6829, "t_prefill": 0.3953, "t_total": 0.6417, "n0": 605, "pred": "fullers", "correct": 1.0}
+{"id": "tv:38929", "answer": "1908-1969", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.4333, "t_total": 0.9877, "n0": 611, "pred": "19081969", "correct": 0.0}
+{"id": "tv:38232", "answer": "$9.99", "exit_layer": 20, "rel_flops": 0.5062, "t_prefill": 0.293, "t_total": 0.6002, "n0": 606, "pred": "999", "correct": 1.0}
+{"id": "tv:38612", "answer": "19", "exit_layer": 21, "rel_flops": 0.5306, "t_prefill": 0.3051, "t_total": 0.4917, "n0": 609, "pred": "19", "correct": 0.0}
+{"id": "tv:35927", "answer": "1", "exit_layer": 18, "rel_flops": 0.4654, "t_prefill": 0.2818, "t_total": 0.4057, "n0": 610, "pred": "1", "correct": 0.6666666666666666}
+{"id": "tv:37595", "answer": "Army", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4456, "t_total": 0.509, "n0": 607, "pred": "army", "correct": 1.0}
+{"id": "tv:36323", "answer": "3", "exit_layer": 19, "rel_flops": 0.4866, "t_prefill": 0.2914, "t_total": 0.4148, "n0": 609, "pred": "3", "correct": 1.0}
+{"id": "tv:35558", "answer": "Yes", "exit_layer": 20, "rel_flops": 0.5062, "t_prefill": 0.2964, "t_total": 0.3593, "n0": 606, "pred": "yes", "correct": 1.0}
+{"id": "tv:39206", "answer": "Hollywood", "exit_layer": 26, "rel_flops": 0.6426, "t_prefill": 0.3711, "t_total": 0.4343, "n0": 612, "pred": "hollywood", "correct": 1.0}
+{"id": "tv:37570", "answer": "The day", "exit_layer": 21, "rel_flops": 0.5291, "t_prefill": 0.3068, "t_total": 0.4296, "n0": 607, "pred": "day", "correct": 0.0}
+{"id": "tv:37575", "answer": "Toll gates", "exit_layer": null, "rel_flops": 0.7735, "t_prefill": 0.4408, "t_total": 0.6283, "n0": 610, "pred": "toll gates", "correct": 0.0}
+{"id": "tv:34674", "answer": "Wanita", "exit_layer": 30, "rel_flops": 0.7286, "t_prefill": 0.4158, "t_total": 0.6047, "n0": 608, "pred": "wanita", "correct": 1.0}
+{"id": "tv:36852", "answer": "We are entering a period of time", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.3515, "t_total": 0.7822, "n0": 605, "pred": "we are entering period of time", "correct": 0.0}
+{"id": "tv:38800", "answer": "0:00", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3227, "t_total": 0.6321, "n0": 607, "pred": "000", "correct": 0.0}
+{"id": "tv:37371", "answer": "Croma", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4389, "t_total": 0.6269, "n0": 606, "pred": "croma", "correct": 0.0}
+{"id": "tv:38236", "answer": "Yes", "exit_layer": 20, "rel_flops": 0.507, "t_prefill": 0.2992, "t_total": 0.3615, "n0": 607, "pred": "yes", "correct": 0.3333333333333333}
+{"id": "tv:37944", "answer": "Sean mcgrath", "exit_layer": 26, "rel_flops": 0.6391, "t_prefill": 0.3698, "t_total": 0.7378, "n0": 606, "pred": "sean mcgrath", "correct": 1.0}
+{"id": "tv:38703", "answer": "Royal", "exit_layer": 21, "rel_flops": 0.5261, "t_prefill": 0.312, "t_total": 0.375, "n0": 603, "pred": "royal", "correct": 1.0}
+{"id": "tv:37950", "answer": "Athletics", "exit_layer": 27, "rel_flops": 0.6634, "t_prefill": 0.3882, "t_total": 0.4517, "n0": 610, "pred": "athletics", "correct": 1.0}
+{"id": "tv:34951", "answer": "Skyla", "exit_layer": 26, "rel_flops": 0.6386, "t_prefill": 0.3704, "t_total": 0.494, "n0": 605, "pred": "skyla", "correct": 0.0}
+{"id": "tv:37990", "answer": "Nuc", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3235, "t_total": 0.4489, "n0": 607, "pred": "nuc", "correct": 0.3333333333333333}
+{"id": "tv:39538", "answer": "0161 928", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.4439, "t_total": 1.0011, "n0": 611, "pred": "0161 928", "correct": 0.0}
+{"id": "tv:36839", "answer": "Seanan McGuire", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4443, "t_total": 0.8168, "n0": 608, "pred": "seanan mcguire", "correct": 0.0}
+{"id": "tv:38901", "answer": "MVD", "exit_layer": 24, "rel_flops": 0.5935, "t_prefill": 0.3471, "t_total": 0.472, "n0": 604, "pred": "mvd", "correct": 0.0}
+{"id": "tv:34967", "answer": "Adidas", "exit_layer": 22, "rel_flops": 0.5562, "t_prefill": 0.3297, "t_total": 0.4527, "n0": 614, "pred": "adidas", "correct": 1.0}
+{"id": "tv:38184", "answer": "432", "exit_layer": 26, "rel_flops": 0.6431, "t_prefill": 0.3751, "t_total": 0.622, "n0": 613, "pred": "432", "correct": 0.0}
+{"id": "tv:35002", "answer": "Macy's", "exit_layer": 27, "rel_flops": 0.6624, "t_prefill": 0.3859, "t_total": 0.6317, "n0": 608, "pred": "macys", "correct": 1.0}
+{"id": "tv:39361", "answer": "Yes", "exit_layer": 19, "rel_flops": 0.4833, "t_prefill": 0.2903, "t_total": 0.3521, "n0": 605, "pred": "yes", "correct": 1.0}
+{"id": "tv:38361", "answer": "Behind car", "exit_layer": null, "rel_flops": 0.7717, "t_prefill": 0.431, "t_total": 0.6173, "n0": 605, "pred": "behind car", "correct": 0.0}
+{"id": "tv:39184", "answer": "No", "exit_layer": 20, "rel_flops": 0.5055, "t_prefill": 0.2987, "t_total": 0.3608, "n0": 605, "pred": "no", "correct": 1.0}
+{"id": "tv:39061", "answer": "Yes", "exit_layer": 18, "rel_flops": 0.4662, "t_prefill": 0.2793, "t_total": 0.3421, "n0": 611, "pred": "yes", "correct": 1.0}
+{"id": "tv:35291", "answer": "0", "exit_layer": 21, "rel_flops": 0.5321, "t_prefill": 0.3101, "t_total": 0.4341, "n0": 611, "pred": "0", "correct": 0.0}
+{"id": "tv:39192", "answer": "Now leaving", "exit_layer": 21, "rel_flops": 0.5321, "t_prefill": 0.3099, "t_total": 0.4329, "n0": 611, "pred": "now leaving", "correct": 1.0}
+{"id": "tv:37274", "answer": "Goose", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.4441, "t_total": 0.5712, "n0": 611, "pred": "goose", "correct": 0.0}
+{"id": "tv:35838", "answer": "12", "exit_layer": 20, "rel_flops": 0.5102, "t_prefill": 0.2987, "t_total": 0.484, "n0": 611, "pred": "12", "correct": 0.6666666666666666}
+{"id": "tv:37923", "answer": "Lg", "exit_layer": 28, "rel_flops": 0.6834, "t_prefill": 0.3943, "t_total": 0.5191, "n0": 606, "pred": "lg", "correct": 1.0}
+{"id": "tv:37629", "answer": "Root beer", "exit_layer": 25, "rel_flops": 0.62, "t_prefill": 0.3561, "t_total": 0.5433, "n0": 611, "pred": "root beer", "correct": 0.0}
+{"id": "tv:38732", "answer": "Paddy reilly's", "exit_layer": null, "rel_flops": 0.7742, "t_prefill": 0.444, "t_total": 0.8151, "n0": 612, "pred": "paddy reillys", "correct": 1.0}
+{"id": "tv:36547", "answer": "No", "exit_layer": 18, "rel_flops": 0.4628, "t_prefill": 0.2752, "t_total": 0.3369, "n0": 607, "pred": "no", "correct": 0.6666666666666666}
+{"id": "tv:38066", "answer": "Tachymeter", "exit_layer": 27, "rel_flops": 0.6618, "t_prefill": 0.3895, "t_total": 0.6355, "n0": 607, "pred": "tachymeter", "correct": 1.0}
+{"id": "tv:37573", "answer": "12:00", "exit_layer": null, "rel_flops": 0.7713, "t_prefill": 0.4345, "t_total": 0.8051, "n0": 604, "pred": "1200", "correct": 0.0}
+{"id": "tv:37485", "answer": "John", "exit_layer": 22, "rel_flops": 0.5576, "t_prefill": 0.3266, "t_total": 0.3902, "n0": 616, "pred": "john", "correct": 0.0}
+{"id": "tv:34822", "answer": "9:13", "exit_layer": null, "rel_flops": 0.7735, "t_prefill": 0.4399, "t_total": 0.7524, "n0": 610, "pred": "913", "correct": 0.0}
+{"id": "tv:36584", "answer": "7-7", "exit_layer": 26, "rel_flops": 0.638, "t_prefill": 0.3723, "t_total": 0.6172, "n0": 604, "pred": "77", "correct": 1.0}
+{"id": "tv:36692", "answer": "Sushi", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4426, "t_total": 0.6309, "n0": 607, "pred": "sushi", "correct": 1.0}
+{"id": "tv:38008", "answer": "55", "exit_layer": 24, "rel_flops": 0.5968, "t_prefill": 0.3525, "t_total": 0.5614, "n0": 609, "pred": "55", "correct": 0.0}
+{"id": "tv:35807", "answer": "Hockey", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.3468, "t_total": 0.4099, "n0": 605, "pred": "hockey", "correct": 0.0}
+{"id": "tv:36168", "answer": "ICO", "exit_layer": null, "rel_flops": 0.7742, "t_prefill": 0.4457, "t_total": 0.5714, "n0": 612, "pred": "ico", "correct": 0.0}
+{"id": "tv:37545", "answer": "Hamilton beach", "exit_layer": 24, "rel_flops": 0.5955, "t_prefill": 0.3507, "t_total": 0.4751, "n0": 607, "pred": "hamilton beach", "correct": 1.0}
+{"id": "tv:34853", "answer": "2", "exit_layer": 21, "rel_flops": 0.5299, "t_prefill": 0.31, "t_total": 0.4332, "n0": 608, "pred": "2", "correct": 1.0}
+{"id": "tv:36535", "answer": "Stella artois", "exit_layer": 26, "rel_flops": 0.6403, "t_prefill": 0.3741, "t_total": 0.6852, "n0": 608, "pred": "stella artois", "correct": 0.0}
+{"id": "tv:37721", "answer": "Jim beam", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.35, "t_total": 0.4744, "n0": 605, "pred": "jim beam", "correct": 0.3333333333333333}
+{"id": "tv:39052", "answer": "0", "exit_layer": 26, "rel_flops": 0.6409, "t_prefill": 0.3657, "t_total": 0.4894, "n0": 609, "pred": "0", "correct": 0.3333333333333333}
+{"id": "tv:36048", "answer": "Srl 18", "exit_layer": 24, "rel_flops": 0.5948, "t_prefill": 0.3497, "t_total": 0.6548, "n0": 606, "pred": "srl 18", "correct": 0.0}
+{"id": "tv:35133", "answer": "Yes", "exit_layer": 18, "rel_flops": 0.4654, "t_prefill": 0.2797, "t_total": 0.3413, "n0": 610, "pred": "yes", "correct": 1.0}
+{"id": "tv:34938", "answer": "Chapel", "exit_layer": 28, "rel_flops": 0.6854, "t_prefill": 0.3994, "t_total": 0.5229, "n0": 610, "pred": "chapel", "correct": 0.0}
+{"id": "tv:35195", "answer": "Logo", "exit_layer": 27, "rel_flops": 0.6645, "t_prefill": 0.3813, "t_total": 0.5062, "n0": 612, "pred": "logo", "correct": 0.0}
+{"id": "tv:39390", "answer": "Vp 68", "exit_layer": 30, "rel_flops": 0.7295, "t_prefill": 0.4255, "t_total": 0.7384, "n0": 610, "pred": "vp 68", "correct": 0.0}
+{"id": "tv:37347", "answer": "Kuwait", "exit_layer": 25, "rel_flops": 0.617, "t_prefill": 0.3567, "t_total": 0.541, "n0": 606, "pred": "kuwait", "correct": 0.0}
+{"id": "tv:36333", "answer": "Start", "exit_layer": null, "rel_flops": 0.7735, "t_prefill": 0.4432, "t_total": 0.5069, "n0": 610, "pred": "start", "correct": 0.0}
+{"id": "tv:35933", "answer": "Burry", "exit_layer": 28, "rel_flops": 0.6829, "t_prefill": 0.3932, "t_total": 0.5194, "n0": 605, "pred": "burry", "correct": 0.0}
+{"id": "tv:36786", "answer": "12", "exit_layer": null, "rel_flops": 0.7742, "t_prefill": 0.4421, "t_total": 0.6283, "n0": 612, "pred": "12", "correct": 0.0}
+{"id": "tv:34848", "answer": "West lothian", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3265, "t_total": 0.5734, "n0": 607, "pred": "west lothian", "correct": 1.0}
+{"id": "tv:38982", "answer": "Le moyne", "exit_layer": null, "rel_flops": 0.7742, "t_prefill": 0.4363, "t_total": 0.6923, "n0": 612, "pred": "le moyne", "correct": 1.0}
+{"id": "tv:36820", "answer": "Seelbach", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.434, "t_total": 0.6204, "n0": 607, "pred": "seelbach", "correct": 0.0}
+{"id": "tv:35102", "answer": "10:10", "exit_layer": null, "rel_flops": 0.7713, "t_prefill": 0.4437, "t_total": 0.8142, "n0": 604, "pred": "1010", "correct": 0.0}
+{"id": "tv:39319", "answer": "18", "exit_layer": 20, "rel_flops": 0.507, "t_prefill": 0.2936, "t_total": 0.4767, "n0": 607, "pred": "18", "correct": 0.0}
+{"id": "tv:35893", "answer": "Gramm", "exit_layer": 26, "rel_flops": 0.6397, "t_prefill": 0.3745, "t_total": 0.4993, "n0": 607, "pred": "gramm", "correct": 0.0}
+{"id": "tv:37792", "answer": "Westjet", "exit_layer": 26, "rel_flops": 0.6397, "t_prefill": 0.3666, "t_total": 0.4918, "n0": 607, "pred": "westjet", "correct": 1.0}
+{"id": "tv:35468", "answer": "Art", "exit_layer": 23, "rel_flops": 0.5747, "t_prefill": 0.3379, "t_total": 0.4007, "n0": 609, "pred": "art", "correct": 0.0}
+{"id": "tv:37365", "answer": "10.9 fl oz", "exit_layer": null, "rel_flops": 0.7742, "t_prefill": 0.443, "t_total": 0.9368, "n0": 612, "pred": "109 fl oz", "correct": 0.0}
+{"id": "tv:35316", "answer": "2011", "exit_layer": 31, "rel_flops": 0.7499, "t_prefill": 0.4299, "t_total": 0.7421, "n0": 606, "pred": "2011", "correct": 1.0}
+{"id": "tv:36110", "answer": "Crockpot", "exit_layer": 26, "rel_flops": 0.6403, "t_prefill": 0.3677, "t_total": 0.5523, "n0": 608, "pred": "crockpot", "correct": 1.0}
+{"id": "tv:34903", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4398, "t_prefill": 0.2751, "t_total": 0.3369, "n0": 606, "pred": "yes", "correct": 1.0}
+{"id": "tv:37290", "answer": "Stop", "exit_layer": 22, "rel_flops": 0.5505, "t_prefill": 0.326, "t_total": 0.3884, "n0": 606, "pred": "stop", "correct": 1.0}
+{"id": "tv:37939", "answer": "White", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4404, "t_total": 0.5039, "n0": 606, "pred": "white", "correct": 0.0}
+{"id": "tv:35946", "answer": "Red bull", "exit_layer": 24, "rel_flops": 0.5968, "t_prefill": 0.3408, "t_total": 0.5302, "n0": 609, "pred": "red bull", "correct": 1.0}
+{"id": "tv:36917", "answer": "Detroit", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3251, "t_total": 0.3877, "n0": 607, "pred": "detroit", "correct": 1.0}
+{"id": "tv:36264", "answer": "17:50", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.442, "t_total": 0.8116, "n0": 609, "pred": "1750", "correct": 0.0}
+{"id": "tv:35098", "answer": "Chanel", "exit_layer": 22, "rel_flops": 0.5505, "t_prefill": 0.3239, "t_total": 0.4487, "n0": 606, "pred": "chanel", "correct": 0.6666666666666666}
+{"id": "tv:35732", "answer": "Heart", "exit_layer": 22, "rel_flops": 0.5534, "t_prefill": 0.3279, "t_total": 0.4027, "n0": 610, "pred": "heart", "correct": 0.0}
+{"id": "tv:35672", "answer": "1970", "exit_layer": 30, "rel_flops": 0.7282, "t_prefill": 0.4219, "t_total": 0.73, "n0": 607, "pred": "1970", "correct": 1.0}
+{"id": "tv:37451", "answer": "Gucci", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4322, "t_total": 0.56, "n0": 608, "pred": "gucci", "correct": 1.0}
+{"id": "tv:35688", "answer": "188", "exit_layer": null, "rel_flops": 0.7731, "t_prefill": 0.4438, "t_total": 0.694, "n0": 609, "pred": "188", "correct": 1.0}
+{"id": "tv:35076", "answer": "Big al's", "exit_layer": 22, "rel_flops": 0.5541, "t_prefill": 0.322, "t_total": 0.5659, "n0": 611, "pred": "big als", "correct": 1.0}
+{"id": "tv:36900", "answer": "Time machine", "exit_layer": 19, "rel_flops": 0.4898, "t_prefill": 0.2923, "t_total": 0.415, "n0": 613, "pred": "time machine", "correct": 1.0}
+{"id": "tv:35502", "answer": "617", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3184, "t_total": 0.5629, "n0": 607, "pred": "617", "correct": 1.0}
+{"id": "tv:34630", "answer": "Dumbledore", "exit_layer": null, "rel_flops": 0.7717, "t_prefill": 0.4376, "t_total": 0.6241, "n0": 605, "pred": "dumbledore", "correct": 1.0}
+{"id": "tv:36194", "answer": "President", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.3473, "t_total": 0.4094, "n0": 605, "pred": "president", "correct": 0.0}
+{"id": "tv:36351", "answer": "My gto", "exit_layer": 23, "rel_flops": 0.5727, "t_prefill": 0.3375, "t_total": 0.5246, "n0": 606, "pred": "my gto", "correct": 1.0}
+{"id": "tv:37315", "answer": "Open data", "exit_layer": 24, "rel_flops": 0.6006, "t_prefill": 0.3537, "t_total": 0.4806, "n0": 615, "pred": "open data", "correct": 1.0}
+{"id": "tv:36469", "answer": "Judge", "exit_layer": 24, "rel_flops": 0.5929, "t_prefill": 0.3501, "t_total": 0.4131, "n0": 603, "pred": "judge", "correct": 0.0}
+{"id": "tv:38946", "answer": "Christmas", "exit_layer": 25, "rel_flops": 0.6176, "t_prefill": 0.3619, "t_total": 0.4246, "n0": 607, "pred": "christmas", "correct": 0.0}
+{"id": "tv:34743", "answer": "Halloween", "exit_layer": 22, "rel_flops": 0.5534, "t_prefill": 0.327, "t_total": 0.5111, "n0": 610, "pred": "halloween", "correct": 1.0}
+{"id": "tv:38353", "answer": "Rum", "exit_layer": 25, "rel_flops": 0.62, "t_prefill": 0.3622, "t_total": 0.4256, "n0": 611, "pred": "rum", "correct": 1.0}
+{"id": "tv:37086", "answer": "P", "exit_layer": 20, "rel_flops": 0.5078, "t_prefill": 0.2981, "t_total": 0.3605, "n0": 608, "pred": "p", "correct": 1.0}
+{"id": "tv:37822", "answer": "Nhracom", "exit_layer": 19, "rel_flops": 0.4841, "t_prefill": 0.2901, "t_total": 0.5349, "n0": 606, "pred": "nhracom", "correct": 0.6666666666666666}
+{"id": "tv:34997", "answer": "1137", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.4401, "t_total": 0.7536, "n0": 611, "pred": "1137", "correct": 0.0}
+{"id": "tv:39072", "answer": "1", "exit_layer": 20, "rel_flops": 0.5094, "t_prefill": 0.2989, "t_total": 0.4226, "n0": 610, "pred": "1", "correct": 0.0}
+{"id": "tv:36694", "answer": "Right", "exit_layer": 30, "rel_flops": 0.729, "t_prefill": 0.4242, "t_total": 0.4882, "n0": 609, "pred": "right", "correct": 0.0}
+{"id": "tv:37317", "answer": "Baseball", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4416, "t_total": 0.5051, "n0": 606, "pred": "baseball", "correct": 0.0}
+{"id": "tv:36327", "answer": "10:45", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4379, "t_total": 0.8121, "n0": 608, "pred": "1045", "correct": 0.0}
+{"id": "tv:38252", "answer": "House on the prairie", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.3477, "t_total": 0.6563, "n0": 605, "pred": "house on prairie", "correct": 1.0}
+{"id": "tv:39549", "answer": "70", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4373, "t_total": 0.6239, "n0": 608, "pred": "70", "correct": 0.0}
+{"id": "tv:36886", "answer": "Golden dreams", "exit_layer": 28, "rel_flops": 0.6849, "t_prefill": 0.3941, "t_total": 0.5787, "n0": 609, "pred": "golden dreams", "correct": 0.0}
+{"id": "tv:37072", "answer": "15", "exit_layer": 20, "rel_flops": 0.507, "t_prefill": 0.3001, "t_total": 0.4839, "n0": 607, "pred": "15", "correct": 0.0}
+{"id": "tv:38857", "answer": "Starbucks", "exit_layer": 22, "rel_flops": 0.5498, "t_prefill": 0.3242, "t_total": 0.5078, "n0": 605, "pred": "starbucks", "correct": 0.0}
+{"id": "tv:36470", "answer": "Historical view of the court of exchequer", "exit_layer": 23, "rel_flops": 0.5781, "t_prefill": 0.3356, "t_total": 0.893, "n0": 614, "pred": "historical view of court of exchequer", "correct": 1.0}
+{"id": "tv:35936", "answer": "14", "exit_layer": 20, "rel_flops": 0.507, "t_prefill": 0.2973, "t_total": 0.4808, "n0": 607, "pred": "14", "correct": 0.0}
+{"id": "tv:35326", "answer": "Guinness", "exit_layer": 24, "rel_flops": 0.5974, "t_prefill": 0.343, "t_total": 0.5309, "n0": 610, "pred": "guinness", "correct": 0.0}
+{"id": "tv:36052", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4389, "t_prefill": 0.2732, "t_total": 0.3344, "n0": 605, "pred": "yes", "correct": 1.0}
+{"id": "tv:35910", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4398, "t_prefill": 0.2683, "t_total": 0.3296, "n0": 606, "pred": "yes", "correct": 1.0}
+{"id": "tv:38251", "answer": "1893", "exit_layer": 21, "rel_flops": 0.5276, "t_prefill": 0.312, "t_total": 0.6192, "n0": 605, "pred": "1893", "correct": 0.0}
+{"id": "tv:38990", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4469, "t_prefill": 0.2695, "t_total": 0.3308, "n0": 614, "pred": "yes", "correct": 1.0}
+{"id": "tv:37654", "answer": "C", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4379, "t_total": 0.5022, "n0": 607, "pred": "c", "correct": 0.0}
+{"id": "tv:34785", "answer": "Pi", "exit_layer": 28, "rel_flops": 0.6839, "t_prefill": 0.4, "t_total": 0.4626, "n0": 607, "pred": "pi", "correct": 1.0}
+{"id": "tv:35455", "answer": "Offshore", "exit_layer": 27, "rel_flops": 0.6618, "t_prefill": 0.3792, "t_total": 0.5685, "n0": 607, "pred": "offshore", "correct": 1.0}
+{"id": "tv:36103", "answer": "Italian", "exit_layer": 22, "rel_flops": 0.552, "t_prefill": 0.3233, "t_total": 0.3864, "n0": 608, "pred": "italian", "correct": 0.3333333333333333}
+{"id": "tv:37599", "answer": "760", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.4444, "t_total": 0.6968, "n0": 611, "pred": "760", "correct": 0.0}
+{"id": "tv:35685", "answer": "3", "exit_layer": 21, "rel_flops": 0.5291, "t_prefill": 0.313, "t_total": 0.4362, "n0": 607, "pred": "3", "correct": 0.0}
+{"id": "tv:37076", "answer": "Amsterdam", "exit_layer": 22, "rel_flops": 0.552, "t_prefill": 0.324, "t_total": 0.3864, "n0": 608, "pred": "amsterdam", "correct": 1.0}
+{"id": "tv:39087", "answer": "Police", "exit_layer": 22, "rel_flops": 0.5505, "t_prefill": 0.3223, "t_total": 0.3847, "n0": 606, "pred": "police", "correct": 1.0}
+{"id": "tv:39522", "answer": "Mountain dew", "exit_layer": 25, "rel_flops": 0.617, "t_prefill": 0.3624, "t_total": 0.5464, "n0": 606, "pred": "mountain dew", "correct": 0.3333333333333333}
+{"id": "tv:37002", "answer": "Straight whiskey", "exit_layer": 22, "rel_flops": 0.5548, "t_prefill": 0.3216, "t_total": 0.5674, "n0": 612, "pred": "straight whiskey", "correct": 0.0}
+{"id": "tv:38858", "answer": "Beer", "exit_layer": 23, "rel_flops": 0.5747, "t_prefill": 0.3351, "t_total": 0.4579, "n0": 609, "pred": "beer", "correct": 0.0}
+{"id": "tv:36275", "answer": "Connie legg", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4392, "t_total": 0.6907, "n0": 607, "pred": "connie legg", "correct": 0.0}
+{"id": "tv:35355", "answer": "Pilsner", "exit_layer": 24, "rel_flops": 0.5948, "t_prefill": 0.3545, "t_total": 0.538, "n0": 606, "pred": "pilsner", "correct": 0.0}
+{"id": "tv:38616", "answer": "35", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.4438, "t_total": 0.632, "n0": 611, "pred": "35", "correct": 1.0}
+{"id": "tv:36229", "answer": "John Tauranac", "exit_layer": null, "rel_flops": 0.7713, "t_prefill": 0.4381, "t_total": 0.75, "n0": 604, "pred": "john tauranac", "correct": 0.0}
+{"id": "tv:35576", "answer": "E-11", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4346, "t_total": 0.6835, "n0": 607, "pred": "e11", "correct": 0.0}
+{"id": "tv:35657", "answer": "Yes", "exit_layer": 18, "rel_flops": 0.4611, "t_prefill": 0.2749, "t_total": 0.3367, "n0": 605, "pred": "yes", "correct": 1.0}
+{"id": "tv:37646", "answer": "Process", "exit_layer": null, "rel_flops": 0.7728, "t_prefill": 0.4384, "t_total": 0.5019, "n0": 608, "pred": "process", "correct": 0.0}
+{"id": "tv:38491", "answer": "Ride", "exit_layer": 23, "rel_flops": 0.5706, "t_prefill": 0.33, "t_total": 0.4539, "n0": 603, "pred": "ride", "correct": 1.0}
+{"id": "tv:38589", "answer": "23", "exit_layer": 23, "rel_flops": 0.572, "t_prefill": 0.3288, "t_total": 0.5119, "n0": 605, "pred": "23", "correct": 1.0}
+{"id": "tv:35591", "answer": "Kickapoo", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4371, "t_total": 0.7319, "n0": 607, "pred": "kickapoo", "correct": 1.0}
+{"id": "tv:35985", "answer": "Macbook", "exit_layer": 22, "rel_flops": 0.5505, "t_prefill": 0.3254, "t_total": 0.4514, "n0": 606, "pred": "macbook", "correct": 0.3333333333333333}
+{"id": "tv:35035", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4407, "t_prefill": 0.2724, "t_total": 0.3339, "n0": 607, "pred": "yes", "correct": 1.0}
+{"id": "tv:36283", "answer": "Emirates", "exit_layer": null, "rel_flops": 0.7738, "t_prefill": 0.4426, "t_total": 0.6296, "n0": 611, "pred": "emirates", "correct": 1.0}
+{"id": "tv:35696", "answer": "C", "exit_layer": 22, "rel_flops": 0.5527, "t_prefill": 0.3182, "t_total": 0.3817, "n0": 609, "pred": "c", "correct": 0.0}
+{"id": "tv:37611", "answer": "Clone wars", "exit_layer": 28, "rel_flops": 0.6854, "t_prefill": 0.3968, "t_total": 0.5846, "n0": 610, "pred": "clone wars", "correct": 1.0}
+{"id": "tv:34809", "answer": "Same", "exit_layer": null, "rel_flops": 0.7735, "t_prefill": 0.4416, "t_total": 0.5063, "n0": 610, "pred": "same", "correct": 0.6666666666666666}
+{"id": "tv:35047", "answer": "Temper", "exit_layer": 22, "rel_flops": 0.5541, "t_prefill": 0.3262, "t_total": 0.4489, "n0": 611, "pred": "temper", "correct": 1.0}
+{"id": "tv:35866", "answer": "Shiner", "exit_layer": 24, "rel_flops": 0.5942, "t_prefill": 0.3399, "t_total": 0.4632, "n0": 605, "pred": "shiner", "correct": 1.0}
+{"id": "tv:35404", "answer": "John Grant", "exit_layer": 24, "rel_flops": 0.5935, "t_prefill": 0.3433, "t_total": 0.4669, "n0": 604, "pred": "john grant", "correct": 0.0}
+{"id": "tv:35298", "answer": "0", "exit_layer": 20, "rel_flops": 0.5117, "t_prefill": 0.3045, "t_total": 0.43, "n0": 613, "pred": "0", "correct": 0.0}
+{"id": "tv:39175", "answer": "10:10", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4433, "t_total": 0.8182, "n0": 607, "pred": "1010", "correct": 0.0}
+{"id": "tv:37514", "answer": "Timex", "exit_layer": 22, "rel_flops": 0.5498, "t_prefill": 0.3228, "t_total": 0.4468, "n0": 605, "pred": "timex", "correct": 0.0}
+{"id": "tv:37188", "answer": "Electronics", "exit_layer": 28, "rel_flops": 0.6829, "t_prefill": 0.3863, "t_total": 0.5101, "n0": 605, "pred": "electronics", "correct": 0.0}
+{"id": "tv:39464", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4434, "t_prefill": 0.2765, "t_total": 0.3381, "n0": 610, "pred": "yes", "correct": 1.0}
+{"id": "tv:38753", "answer": "10:50", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4333, "t_total": 0.8027, "n0": 606, "pred": "1050", "correct": 0.0}
+{"id": "tv:36964", "answer": "Miss universe", "exit_layer": 22, "rel_flops": 0.552, "t_prefill": 0.3277, "t_total": 0.4525, "n0": 608, "pred": "miss universe", "correct": 1.0}
+{"id": "tv:37324", "answer": "12/25", "exit_layer": 25, "rel_flops": 0.6182, "t_prefill": 0.3652, "t_total": 0.7337, "n0": 608, "pred": "1225", "correct": 0.0}
+{"id": "tv:37455", "answer": "En Vogue", "exit_layer": 22, "rel_flops": 0.5513, "t_prefill": 0.3186, "t_total": 0.5364, "n0": 607, "pred": "en vogue", "correct": 0.0}
+{"id": "tv:35350", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4407, "t_prefill": 0.2743, "t_total": 0.3366, "n0": 607, "pred": "yes", "correct": 1.0}
+{"id": "tv:36803", "answer": "Yes", "exit_layer": 17, "rel_flops": 0.4434, "t_prefill": 0.2791, "t_total": 0.3406, "n0": 610, "pred": "yes", "correct": 1.0}
+{"id": "tv:39419", "answer": "Easton", "exit_layer": 24, "rel_flops": 0.5968, "t_prefill": 0.3458, "t_total": 0.47, "n0": 609, "pred": "easton", "correct": 1.0}
+{"id": "tv:38576", "answer": "Samsung", "exit_layer": null, "rel_flops": 0.772, "t_prefill": 0.4328, "t_total": 0.5577, "n0": 606, "pred": "samsung", "correct": 0.0}
+{"id": "tv:35687", "answer": "Um 154", "exit_layer": 26, "rel_flops": 0.6386, "t_prefill": 0.362, "t_total": 0.6688, "n0": 605, "pred": "um 154", "correct": 0.0}
+{"id": "tv:37186", "answer": "$29.95", "exit_layer": 20, "rel_flops": 0.5062, "t_prefill": 0.2955, "t_total": 0.663, "n0": 606, "pred": "2995", "correct": 0.0}
+{"id": "tv:37157", "answer": "Scotland", "exit_layer": 29, "rel_flops": 0.7056, "t_prefill": 0.4059, "t_total": 0.4691, "n0": 606, "pred": "scotland", "correct": 0.0}
+{"id": "tv:36133", "answer": "Challenge", "exit_layer": 28, "rel_flops": 0.6834, "t_prefill": 0.3937, "t_total": 0.4566, "n0": 606, "pred": "challenge", "correct": 0.0}
+{"id": "tv:34784", "answer": "The life of a boy", "exit_layer": null, "rel_flops": 0.7724, "t_prefill": 0.4367, "t_total": 0.7481, "n0": 607, "pred": "life of boy", "correct": 0.0}
+{"id": "tv:37985", "answer": "Adidas", "exit_layer": 30, "rel_flops": 0.7277, "t_prefill": 0.4138, "t_total": 0.5399, "n0": 606, "pred": "adidas", "correct": 1.0}
+{"id": "tv:36841", "answer": "Passenger", "exit_layer": 21, "rel_flops": 0.5291, "t_prefill": 0.312, "t_total": 0.4361, "n0": 607, "pred": "passenger", "correct": 0.0}
+{"id": "tv:38076", "answer": "Blobo", "exit_layer": 28, "rel_flops": 0.6839, "t_prefill": 0.3895, "t_total": 0.5151, "n0": 607, "pred": "blobo", "correct": 1.0}
+{"id": "tv:36195", "answer": "Elizabeth", "exit_layer": 22, "rel_flops": 0.5541, "t_prefill": 0.323, "t_total": 0.3855, "n0": 611, "pred": "elizabeth", "correct": 1.0}
+{"id": "tv:38447", "answer": "Eat pay", "exit_layer": 24, "rel_flops": 0.5961, "t_prefill": 0.3448, "t_total": 0.5301, "n0": 608, "pred": "eat pay", "correct": 0.0}

@@ -9,14 +9,20 @@ BENCH=["pope","mme","gqa","textvqa"]
 R={}
 for b in BENCH:
     R[b]={p.stem.split("__",1)[1]:[json.loads(l) for l in open(p)] for p in sorted(D.glob(f"{b}__*.jsonl"))}
+FAMILIES=["baseline","fixed","lens","cf","fastv"]   # row order; combos (a+b) and uniform ablations sort last
 def key(n):
-    m=re.match(r"(baseline|fixed_E(\d+)|lens_t([\d.]+)|cf_t([\d.]+))",n)
-    fam={"b":0,"f":1,"l":2,"c":3}[n[0]]
-    num=float(m.group(2) or m.group(3) or m.group(4) or 0)
-    return (("uni" in n), fam, -num if fam>1 else num, n)
+    head=n.split("+")[0]
+    fam=next((i for i,f in enumerate(FAMILIES) if head.startswith(f)),len(FAMILIES))
+    m=re.search(r"_E(\d+)|_t([\d.]+)|_K(\d+)_R([\d.]+)",head)
+    num=float(next((g for g in (m.groups() if m else ()) if g),0))
+    return (("uni" in n), ("+" in n), fam, -num if fam in (2,3) else num, n)
+def occ_keys(recs):   # (id, k-th occurrence) -- MME ids repeat (two questions per image), files are in item order
+    seen=Counter(); out=[]
+    for r in recs: out.append((r["id"],seen[r["id"]])); seen[r["id"]]+=1
+    return out
 def stats(b,n):
-    recs=R[b][n]; base=R[b]["baseline"]; bp={r["id"]:r["pred"] for r in base}
-    acc=np.mean([r["correct"] for r in recs]); ag=np.mean([bp[r["id"]]==r["pred"] for r in recs])
+    recs=R[b][n]; base=R[b]["baseline"]; bp={k:r["pred"] for k,r in zip(occ_keys(base),base)}
+    acc=np.mean([r["correct"] for r in recs]); ag=np.mean([bp[k]==r["pred"] for k,r in zip(occ_keys(recs),recs)])
     fl=np.mean([r["rel_flops"] for r in recs]); ex=[r["exit_layer"] if r["exit_layer"] is not None else 32 for r in recs]
     bc=[ (r["correct"]>=1 if isinstance(r["correct"],float) else bool(r["correct"])) for r in base]
     c=[ (r["correct"]>=1 if isinstance(r["correct"],float) else bool(r["correct"])) for r in recs]
@@ -24,6 +30,8 @@ def stats(b,n):
     pf=np.mean([r["t_prefill"] for r in recs])*1000
     return acc,ag,fl,np.mean(ex),pf,b01,b10,p,ex
 names=sorted(set.intersection(*(set(R[b]) for b in BENCH)),key=key)
+partial=sorted(set.union(*(set(R[b]) for b in BENCH))-set(names),key=key)
+if partial: print("methods not run on all 4 benchmarks (excluded from the tables):", ", ".join(partial), "\n")
 print("acc / agree / FLOPs%  (prefill ms)   -- 4 benchmarks")
 print(f"{'method':<32}"+"".join(f"{b:>26}" for b in BENCH))
 for n in names:

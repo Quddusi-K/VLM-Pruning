@@ -1,7 +1,17 @@
 import json, sys, numpy as np
 from pathlib import Path
 from collections import defaultdict
-from scipy.stats import spearmanr
+try:
+    from scipy.stats import spearmanr
+except ImportError:   # numpy fallback: Pearson on average ranks; p from the large-n normal approximation z = rho*sqrt(n-1)
+    import math
+    def _rank(v):
+        v=np.asarray(v,float); order=np.argsort(v); r=np.empty(len(v)); r[order]=np.arange(len(v))
+        for u in np.unique(v): m=v==u; r[m]=r[m].mean()
+        return r
+    def spearmanr(x,y):
+        rho=np.corrcoef(_rank(x),_rank(y))[0,1]; z=abs(rho)*math.sqrt(len(x)-1)
+        return rho, math.erfc(z/math.sqrt(2))
 B=Path(sys.argv[1]); A=Path(sys.argv[2])
 for b in ("pope","gqa","textvqa"):
     prof={json.loads(l)["id"]:json.loads(l) for l in open(A/f"profile_{b}.jsonl")}

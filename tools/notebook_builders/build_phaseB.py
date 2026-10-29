@@ -573,24 +573,31 @@ def run_eval(bench, cfg, max_items=None):
     items, suffix, kind = BENCH[bench]
     items = items[:max_items] if max_items else items
     path = OUT / f"{bench}__{cfg.name}.jsonl"
+    # MME ids repeat (two questions per image): key cached records by (id, k-th occurrence), in item order
+    def occ_keys(ids):
+        seen = Counter(); out = []
+        for i in ids:
+            out.append((i, seen[i])); seen[i] += 1
+        return out
     done = {}
     if path.exists():
-        for l in open(path):
-            r = json.loads(l); done[r["id"]] = r
-    todo = [it for it in items if it["id"] not in done]
+        recs = [json.loads(l) for l in open(path)]
+        done = dict(zip(occ_keys([r["id"] for r in recs]), recs))
+    keys = occ_keys([it["id"] for it in items])
+    todo = [(k, it) for k, it in zip(keys, items) if k not in done]
     print(f"[{bench}/{cfg.name}] {len(done)} cached, {len(todo)} to run")
     mnt = 3 if kind == "yesno" else 10
     with open(path, "a") as f:
-        for i, it in enumerate(todo):
+        for i, (k, it) in enumerate(todo):
             inp = build_inputs(Image.open(it["image_path"]).convert("RGB"), it["question"], suffix)
             r = engine_generate(inp, cfg, mnt)
             rec = {"id": it["id"], "answer": r["text"], "exit_layer": r["exit_layer"], "rel_flops": round(r["rel_flops"], 4),
                    "t_prefill": round(r["t_prefill"], 4), "t_total": round(r["t_total"], 4), "n0": r["n0"], **score(bench, kind, r["text"], it)}
-            f.write(json.dumps(rec) + "\n"); f.flush(); done[it["id"]] = rec
+            f.write(json.dumps(rec) + "\n"); f.flush(); done[k] = rec
             if (i + 1) % 100 == 0:
                 print(f"  {i+1}/{len(todo)}")
     free_mem()
-    return [done[it["id"]] for it in items]
+    return [done[k] for k in keys]
 
 METHODS = [ExitConfig("none"),
            ExitConfig("lens", **CALIB["lens"]),
@@ -610,12 +617,12 @@ def mcnemar(a, b):
     return b01, b10, p
 
 for b, runs in RUNS.items():
-    base = runs["baseline"]; base_pred = {r["id"]: r["pred"] for r in base}
+    base = runs["baseline"]
     base_c = [bool(r["correct"]) if not isinstance(r["correct"], float) else r["correct"] >= 1 for r in base]
     print(f"\n==== {b.upper()} (n={len(base)}) ====")
     print(f"{'method':<36}{'acc':>7}{'agree':>8}{'FLOPs':>8}{'exit μ':>8}{'prefill ms':>11}{'e2e ms':>8}{'vs base p':>10}")
     for name, recs in runs.items():
-        acc = np.mean([r["correct"] for r in recs]); agree = np.mean([base_pred[r["id"]] == r["pred"] for r in recs])
+        acc = np.mean([r["correct"] for r in recs]); agree = np.mean([x["pred"] == y["pred"] for x, y in zip(recs, base)])   # by position (MME ids repeat)
         ex = [r["exit_layer"] for r in recs if r["exit_layer"] is not None]
         c = [bool(r["correct"]) if not isinstance(r["correct"], float) else r["correct"] >= 1 for r in recs]
         _, _, p = mcnemar(c, base_c)

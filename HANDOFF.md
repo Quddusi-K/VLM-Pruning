@@ -1,6 +1,6 @@
 # Handoff: training-free per-image visual-token exit for VLMs
 
-*Written 26 October 2026 for continuing the project in Claude Code. Read this first, then
+*Written 26 October 2026, updated 29 October 2026 (engine v2 / LLaVA-NeXT results landed, §8F), for continuing the project in Claude Code. Read this first, then
 `docs/results-and-execution-plan.md` (all numbers) and `docs/research-and-literature.md` (concepts, literature,
 positioning).*
 
@@ -28,8 +28,11 @@ token ranking); that hypothesis failed cleanly and became the motivation/analysi
 | Phase A: oracle exit layers + exit-signal profiling, 4 benchmarks | done, **pass** in the one-threshold setting | §8A, §8C |
 | Phase B: SDPA+KV-cache engine, full-generation eval, latency | done | §8D |
 | Phase B sweep: fixed-E vs lens-τ vs cf-τ vs uniform, 17 methods × 4 benchmarks | done | §8E |
-| Engine v2: cache-based cf probe, FastV-in-engine, LLaVA-NeXT-7B with same τ | **running on Kaggle now** (`notebooks/phaseB2-engine-v2.ipynb`) | — |
-| FlashAttention-2 timings (needs Ampere GPU), larger subsets, RefCOCO, write-up | not started | — |
+| Engine v2: cache-based cf probe, FastV-in-engine (LLaVA-1.5, 4 benchmarks) | done | §8F.1–8F.2 |
+| LLaVA-NeXT-7B with the same τ, 300/benchmark | done; τ transfers except lens on TextVQA | §8F.3 |
+| Calibration protocol (held-out split, 50 seeds, leave-one-benchmark-out) | done; recovers τ=0.05; adaptive 14–20 pt FLOPs below VTW-style fixed E at every target | §8G |
+| NeXT follow-up (lens τ=0.01/0.0245, cf τ=0.025, E20/E28, FastV R0.75, combo, 500–600/benchmark) | next | — |
+| FlashAttention-2 timings (needs Ampere GPU), RefCOCO, write-up | not started | — |
 
 ## 3. Key results to remember
 
@@ -43,7 +46,20 @@ token ranking); that hypothesis failed cleanly and became the motivation/analysi
   open-ended "query" questions exit at layer ~26, yes/no "verify/logical" at ~18.
 - **Uniform visual subsampling is an ablation, not part of the method**: −2.3 pt mean accuracy, −6.5 on TextVQA at 50%.
 - **Latency**: lens probe is free (336 ms prefill @ 59% FLOPs vs fixed E20 343 ms @ 64%). The *old* cf probe cost
-  +70 ms (recomputed full K/V); engine v2 fixes this by reading the layer's cached K/V.
+  +70 ms (recomputed full K/V); engine v2 reads the layer's cached K/V and costs ≈ +20 ms (§8F.2).
+- **Engine v2 (§8F)**: FastV K2 R0.5 on the same SDPA engine keeps 88% of answers at 55% FLOPs (significantly worse
+  on GQA); exit at 67–68% keeps 92–94% with no significant loss; at FastV's FLOPs the exit alone is *worse*
+  (cf τ=0.1: −2.5 pt). FastV + lens composes: 39% FLOPs, −1.2 pt vs FastV R0.75 at 33%, −3.1 pt. Do not claim
+  "exit beats FastV at matched FLOPs"; claim the high-fidelity regime and composability.
+- **Calibration protocol (§8G)**: choosing the cheapest grid setting that reaches 95% pooled agreement on a 20%
+  calibration split recovers lens τ=0.05 and cf τ=0.05; the same rule over fixed E (= VTW) picks E28 at 88% FLOPs vs
+  68% for lens. Holds at T=97/98 (14–20 pt gap). Leave-one-benchmark-out: TextVQA held out breaks fixed E24 and lens
+  τ=0.2 at T=95%, not cf τ=0.05.
+- **LLaVA-NeXT-7B, same τ (n=300)**: lens τ=0.05 is loss-free on POPE/MME/GQA at 59/61/70% FLOPs (prefill −36% on
+  POPE), but **significantly worse on TextVQA** (63.8 vs 68.0, p=0.013); cf τ=0.05 is safe everywhere but saves
+  little on TextVQA (94% FLOPs). The one-global-τ story needs a proper calibration protocol (see §7).
+- **MME gotcha #2**: the in-notebook summary double-counted MME records (81.8% printed vs 74.4% in the files);
+  fixed in the builder (records keyed by (id, occurrence)). Trust the offline scripts.
 - **InfoScore (layer-level) is a clean diagnostic but does not improve pruning**: layers 0–1 are image-independent
   (InfoScore≈1), layers 2–3 most content-adaptive, yet ranking tokens with any layer gives the same accuracy; depth
   dominates. Per-image attention entropy has AUC≈0.5 for predicting pruning damage. (Keep as motivation.)
@@ -66,13 +82,15 @@ notebooks/
   phaseA-exit-profiling.ipynb           Phase A: per-example oracle exit layers + signals (POPE, GQA)
   phaseA-exit-profiling-v2.ipynb        + TextVQA, MME, pooled/transfer analysis (§8.5)
   phaseB-exit-engine.ipynb              Engine v1 (transformers 4.49, SDPA, DynamicCache), unit tests, latency, eval
-  phaseB2-engine-v2.ipynb               Engine v2: cache-based cf probe, FastV-in-engine, MODEL_TAG llava15|llavanext
+  phaseB2-engine-v2.ipynb               Engine v2: cache-based cf probe, FastV-in-engine, MODEL_TAG llava15|llavanext (run 27 Oct)
   archive/                              original Phase 0 / early Phase 1 notebooks
 tools/
   notebook_builders/build_*.py          Python scripts that generate the notebooks (edit these, then regenerate)
   analysis/phaseB_sweep_tables.py       acc/agree/FLOPs/latency/McNemar tables for a phaseB results dir
   analysis/phaseB_matched_fidelity.py   fixed-E FLOPs at the same agreement as each adaptive point (+ MME by-position fix)
   analysis/phaseB_adaptivity.py         exit layer vs Phase A oracle (Spearman), exit by question type
+  analysis/phaseB_latency_overhead.py   probe/pruning overhead = prefill-time residual vs the FLOPs fit of fixed-E runs
+  analysis/phaseB_calibration.py        held-out threshold selection (split + leave-one-benchmark-out), VTW-style fixed E baseline
 results/                                untracked; see results/README.md for the expected layout
 ```
 
@@ -117,19 +135,28 @@ Regenerate a notebook: `cd tools/notebook_builders && python build_phaseB2.py` (
 
 ## 7. Open items / next steps (in order)
 
-1. Collect `phaseB2_llava15.zip` and `phaseB2_llavanext.zip`; run `tools/analysis/*.py` on them; add §8F to the results
-   doc. Questions they answer: Is the v2 cf probe overhead gone? FastV vs exit on the same engine (accuracy, FLOPs,
-   latency)? Does τ=0.05 transfer to LLaVA-NeXT unchanged, and how large are the savings with ~2.9k visual tokens?
-2. Decide the paper's method name and default (currently: lens exit, τ=0.05, m=1, E_min=1; cf as variant).
-3. Baselines on the same engine for the main table: unpruned, fixed exit (VTW), FastV K2/R.5 and R.75, uniform-only.
-   Cite DyVTE / AdaVSkip numbers as trained references.
-4. Robustness: larger GQA/TextVQA subsets (1000+), a calibration protocol on a held-out image set (τ chosen there, not
-   on benchmarks), batch>1 note (per-image exits break batching → report batch 1 or pad).
-5. Optional: RefCOCO/localization, Ampere FA2 latency, Qwen2.5-VL port.
-6. Literature re-check for 2025–26 training-free per-instance visual exit before submission (AdaVSkip, Sept 2026, is
+1. ~~Collect the engine-v2 zips, run the analysis, add §8F.~~ Done 29 Oct (§8F). ~~Re-add the 20 Oct
+   `phaseB_results.zip`.~~ Done 29 Oct; §8E re-verified from it.
+2. ~~Calibration protocol.~~ Done 29 Oct (§8G, `tools/analysis/phaseB_calibration.py`). At T=95% it picks lens
+   τ=0.05 and cf τ=0.05 (the defaults) vs fixed E28; at T=98% lens τ=0.01 / cf τ=0.025. TextVQA held out is the
+   stress case (fixed E24 and lens τ=0.2 fail at T=95%, cf holds).
+3. **NeXT follow-up Kaggle run** (`MODEL_TAG="llavanext"`, one session ≈ 8–10 h): N_SUB 600 GQA / 500 TextVQA (POPE/MME
+   stay 300; ids are a strided subset, so the 300 records are reused by the resumable loop); add lens τ=0.0245 and
+   τ=0.01, cf τ=0.025, fixed E20 and E28, FastV K2 R0.75, FastV K2 R0.5 + lens; keep the rest. Edit the `METHODS`
+   list for `llavanext` in `build_phaseB2.py` and set `N_SUB` per benchmark. Answers: do the T=95/98 picks from
+   §8G transfer to NeXT TextVQA; is FastV really loss-free on NeXT; matched fidelity above E24.
+4. **cf v1-vs-v2 check**: on ~20 POPE examples print the per-layer probe value from both implementations (v1 code is
+   in `build_phaseB.py`); explain the ~1-layer-earlier exit (§8F.2.2). Then fix cf numbers.
+5. Decide the method name and the default (lens τ from item 2; cf τ=0.05 as the conservative variant).
+6. Main-table baselines are now all on one engine: unpruned, fixed exit (VTW), FastV K2 R0.5 / R0.75, FastV + exit.
+   Add uniform-only from §8E; cite DyVTE / AdaVSkip as trained references.
+7. Robustness notes for the paper: batch>1 (per-image exits break batching → batch 1 or pad to the latest exit in the
+   batch), the lens signal never fires before layer ~17, cf fires from 12.
+8. Optional: RefCOCO/localization, Ampere FA2 latency (rent an A100/L4; SDPA numbers are T4), Qwen2.5-VL port.
+9. Literature re-check for 2025–26 training-free per-instance visual exit before submission (AdaVSkip, Sept 2026, is
    the closest; it is trained).
-7. Write-up: motivation = InfoScore analysis + FastV sweep (depth dominates, attention-ranking quality does not);
-   method = per-image exit; results = §8E tables/curves, latency, adaptivity; ablations = τ, signal, uniform stage.
+10. Write-up: motivation = InfoScore analysis + FastV sweep (depth dominates); method = per-image exit; results =
+    §8E/§8F tables, latency, adaptivity, NeXT transfer; ablations = τ, signal, uniform stage, FastV composition.
 
 ## 8. Kaggle setup reminders
 

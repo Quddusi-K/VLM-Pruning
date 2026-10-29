@@ -20,6 +20,10 @@ for b in BENCH:
     for n in sorted(R[b], key=lambda n:-fl(b,n)):
         if n.startswith(("lens","cf")) and "uni" not in n:
             a=agree_pos(b,n); f=fl(b,n)
-            if a<=max(ys): f_fix=np.interp(a, ys, xs)   # ys monotone? check
-            else: f_fix=float("nan")
-            print(f"   {n:<24} agree {a*100:5.1f} @ {f*100:5.1f}%  | fixed-E needs {f_fix*100:5.1f}%  -> saving {(f_fix-f)*100:+5.1f} pt")
+            # cheapest fixed point reaching this agreement; interpolate on the rising segment below it.
+            # Flat segments (e.g. 100% at both E16 and E24) resolve to the cheaper point, not the later one.
+            k=next((i for i,y in enumerate(ys) if y>=a), None)
+            if k is None: f_fix=float("nan"); note="(above every fixed E run)"
+            elif k==0: f_fix=xs[0]; note="(<= cheapest fixed E run)"
+            else: f_fix=xs[k-1]+(xs[k]-xs[k-1])*(a-ys[k-1])/(ys[k]-ys[k-1]); note=""
+            print(f"   {n:<24} agree {a*100:5.1f} @ {f*100:5.1f}%  | fixed-E needs {f_fix*100:5.1f}%  -> saving {(f_fix-f)*100:+5.1f} pt {note}")

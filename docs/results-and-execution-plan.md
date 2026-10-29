@@ -4,7 +4,7 @@
 
 *Companion file: `research-and-literature.md`, which holds the concepts, definitions and literature.*
 
-*Last updated: 20 October 2026. Every number below was recomputed directly from the result files in `infoprune_results.zip` (Phases 0–1), `phaseA_results_v2.zip` (Phase A, 4 benchmarks) and `phaseB_results.zip` (Phase B).*
+*Last updated: 29 October 2026. Every number below was recomputed directly from the result files in `infoprune_results.zip` (Phases 0–1), `phaseA_results_v2.zip` (Phase A, 4 benchmarks), `phaseB_results.zip` (Phase B) and `phaseB2_{llava15,llavanext}.zip` (engine v2, §8F). §8E was re-verified from the 20 Oct `phaseB_results.zip` on 29 Oct (every number and significance star reproduces).*
 
 ---
 
@@ -22,7 +22,10 @@
 | Phase A v2: TextVQA (500) + MME (660) profiling, pooled analysis | ✅ done (§8C) |
 | Phase B: SDPA + KV-cache engine with per-image exit | ✅ engine verified (logit diff 0.008 vs stock); POPE/GQA evaluated with real latency (§8D) |
 | Phase B sweep: τ sweep + fixed-E curve + uniform ablation on 4 benchmarks | ✅ done (§8E): lens τ≤0.1 has no significant accuracy loss anywhere; beats fixed exit on GQA/TextVQA, ties on POPE/MME |
-| Engine v2 (cache-based cf probe, FastV-in-engine) + LLaVA-NeXT-7B | ⏳ next |
+| Engine v2 (cache-based cf probe, FastV-in-engine) on LLaVA-1.5, 4 benchmarks | ✅ done (§8F.1–8F.2): cf probe overhead down from +70 ms to ≈+20 ms; FastV on the same kernel path; exit and FastV occupy different fidelity regimes and compose |
+| LLaVA-NeXT-7B with the same τ (no recalibration), 300/benchmark | ✅ done (§8F.3): τ transfers on POPE/MME/GQA; **lens τ=0.05 is significantly worse on NeXT TextVQA** (−4.2 pt, p=0.013); cf τ=0.05 holds everywhere |
+| Calibration protocol (τ and fixed E chosen on held-out split at target fidelity; 50 seeds; leave-one-benchmark-out) | ✅ done (§8G): recovers lens/cf τ=0.05 at T=95%; adaptive exit 14–20 pt FLOPs below the VTW-style fixed layer at every target; TextVQA is the transfer stress test |
+| Larger NeXT subsets + lens τ ∈ {0.0245, 0.01}, cf τ=0.025, fixed E20/E28, FastV R0.75, FastV+lens on NeXT; FA2 timings; RefCOCO | ⏳ next (HANDOFF §7) |
 
 ---
 
@@ -635,6 +638,10 @@ significantly worse on any benchmark.**
 Lens probe is free: lens τ=0.05 336 ms @ 59% FLOPs vs fixed E20 343 ms @ 64%. The cf probe as implemented is not:
 cf τ=0.05 377 ms @ 54% vs fixed E16 308 ms @ 52% (+70 ms), because it recomputes full-sequence K/V projections at
 every probed layer. Fix: reuse the layer's cached K/V (one query row) → engine v2.
+Residuals against the per-benchmark FLOPs→time fit of the baseline + fixed-E runs (`phaseB_latency_overhead.py`;
+fit noise ±5–12 ms): lens τ ∈ {0.01…0.2} +5 to +11 ms; v1 cf τ=0.1 / 0.05 / 0.025 +63 / +77 / +92 ms (the probe
+runs from layer 12 until exit, so a later exit costs more); uniform-stage variants +6 to +11 ms. Engine v2 brings cf
+τ=0.05 to +21 ms (§8F.2.1).
 
 ### 8E.5 Decisions
 1. **Method = lens exit, default τ=0.05**, no uniform stage. cf as the stronger variant once the probe is cheap.
@@ -643,6 +650,184 @@ every probed layer. Fix: reuse the layer's cached K/V (one query row) → engine
    attention), uniform-only, unpruned.
 4. Next: engine v2 (cache-based cf, FastV-in-engine); LLaVA-NeXT-7B with the **same τ, no recalibration**;
    Ampere GPU for FlashAttention timings; larger GQA/TextVQA subsets.
+
+---
+
+## 8F. Engine v2: cache-based cf probe, FastV on the same engine, LLaVA-NeXT-7B (27 Oct 2026)
+
+**Setup.** `phaseB2-engine-v2.ipynb`, stock `transformers` 4.49, fp16, SDPA, `DynamicCache`, 2×T4, batch 1. Unit
+tests (from the Kaggle log): max |logit diff| engine vs stock 0.0078, identical greedy text; cf probe row vs direct
+computation max diff 0.00; FastV K2 R0.5 sequence length after pruning 312 (expected 312), FLOPs 0.543. Changes vs
+Phase B: the cf probe reads layer E's cached (post-RoPE) K/V and recomputes only the last token's query (decision
+applied before layer E+1); FastV's criterion (last-token attention over visual tokens at layer K−1) is computed from
+the same one-row attention, so FastV runs on SDPA + KV cache. Data: `phaseB2_llava15.zip` (POPE 900, MME 660, GQA 600,
+TextVQA 500; baseline / fixed E16–E28 / lens τ=0.0245 on POPE and GQA restored from the Phase B run, everything else
+re-run) and `phaseB2_llavanext.zip` (`llava-hf/llava-v1.6-vicuna-7b-hf`; strided 300-example subsets of the same item
+lists; same τ as LLaVA-1.5, no recalibration; the MME subset has one question per image). All numbers from
+`tools/analysis/phaseB_sweep_tables.py`, `phaseB_matched_fidelity.py`, `phaseB_adaptivity.py` and
+`phaseB_latency_overhead.py` (new). Agreement is aligned by (id, occurrence) so MME's repeated ids are handled.
+
+### 8F.1 LLaVA-1.5-7B: accuracy / agreement with the unpruned model / prefill FLOPs (%) (prefill ms)
+| Method | POPE | MME | GQA | TextVQA | Mean FLOPs | Mean agree | Mean acc Δ |
+|---|---|---|---|---|---|---|---|
+| baseline | 88.6 / 100 / 100 (498) | 74.4 / 100 / 100 (553) | 60.2 / 100 / 100 (504) | 50.8 / 100 / 100 (556) | 100 | 100 | — |
+| fixed E16 | 88.8 / 99.6 / 52 (308) | 74.7 / 98.8 / 53 (316) | 53.0\* / 73.3 / 53 (315) | 17.1\* / 27.0 / 53 (308) | 52 | 70.9 | −10.1 |
+| fixed E24 | 88.6 / 100 / 76 (400) | 74.2 / 98.6 / 76 (408) | 59.2 / 93.0 / 76 (403) | 48.5\* / 82.8 / 76 (416) | 76 | 89.8 | −0.9 |
+| **lens τ=0.05** | 88.6 / 99.8 / 59 (335) | 75.2 / 98.6 / 60 (339) | 59.3 / 95.5 / 73 (414) | 49.9 / 89.8 / 80 (464) | 68 | 92.1 | −0.25 |
+| cf τ=0.05 (v2 probe) | 88.4 / 98.8 / 50 (308) | 73.8 / 95.2 / 50 (311) | 59.8 / 96.8 / 76 (438) | 50.7 / 97.4 / 93 (536) | 67 | 93.8 | −0.3 |
+| cf τ=0.1 (v2 probe) | 89.1 / 97.0 / 40 (268) | 71.7\* / 92.7 / 41 (275) | 55.3\* / 82.5 / 56 (338) | 47.7\* / 84.8 / 77 (449) | 53 | 86.5 | −2.5 |
+| FastV K2 R0.5 | 88.2 / 95.0 / 54 (345) | 73.6 / 95.6 / 55 (340) | 57.0\* / 88.2 / 55 (336) | 51.1 / 86.8 / 55 (342) | 55 | 88.1 | −1.0 |
+| FastV K3 R0.5 | 88.3 / 95.6 / 56 (347) | 73.8 / 95.8 / 56 (342) | 57.2\* / 87.0 / 57 (343) | 50.2 / 84.2 / 56 (346) | 56 | 87.2 | −1.1 |
+| FastV K2 R0.75 | 84.7\* / 88.6 / 32 (205) | 72.6 / 90.3 / 33 (210) | 54.3\* / 78.2 / 33 (210) | 49.9 / 76.8 / 33 (211) | 33 | 81.0 | −3.1 |
+| FastV K2 R0.5 + lens τ=0.05 | 88.3 / 95.1 / 34 (243) | 73.9 / 95.3 / 35 (241) | 56.8\* / 85.7 / 42 (281) | 50.1 / 80.8 / 45 (307) | 39 | 86.0 | −1.2 |
+
+\* significantly worse than baseline (exact McNemar, p < 0.05). Mean exit layer / share never exiting, lens τ=0.05:
+POPE 18.3 / 0%, MME 18.4 / 0%, GQA 22.9 / 13%, TextVQA 25.3 / 23%; cf τ=0.05: 15.4 / 0%, 15.2 / 0%, 23.8 / 16%,
+29.6 / 46%.
+
+### 8F.2 Findings (LLaVA-1.5)
+1. **The v2 cf probe is cheap.** Residual prefill time against a per-benchmark linear fit of time vs FLOPs on the
+   baseline + fixed-E runs (fit noise ≈ ±10 ms: baseline +4, fixed E16 +7, fixed E24 −8): cf τ=0.05 **+21 ms** mean
+   (POPE +12, MME +15, GQA +35, TextVQA +23) vs +70 ms with the v1 probe; lens τ=0.05 +10 ms (POPE +4, MME −4,
+   GQA +22, TextVQA +17); FastV-in-engine +22–25 ms (one-row attention + token gather). In the tables above, cf τ=0.05
+   on POPE costs 308 ms at 50% FLOPs, the same as fixed E16 at 52%. Same script on the §8E (v1) files: cf τ=0.05
+   +77 ms, so the v2 probe removes about three quarters of the overhead.
+2. **v2 cf is not numerically identical to v1.** At τ=0.05 it exits about one layer earlier (POPE mean exit 15.4 vs
+   16.8 in §8E; FLOPs 50% vs 54%) and keeps slightly fewer POPE answers (98.8% vs 99.9%). The notebook's unit test
+   checks the v2 row against a direct computation of the same quantity, not against v1. To check before the paper
+   fixes cf numbers (open question).
+3. **FastV and exit occupy different regimes on the same engine.** FastV K2 R0.5 at 55% FLOPs keeps 88.1% of
+   answers on average and is significantly worse on GQA (57.0 vs 60.2, p=0.008). Exit at 67–68% FLOPs keeps 92–94%
+   and is never significantly worse. At FastV's operating point (53–55% FLOPs) the exit alone is *worse*: cf τ=0.1
+   gives 86.5% agreement and −2.5 pt (significant on MME, GQA, TextVQA). So the claim is not "exit beats FastV at
+   matched FLOPs"; it is "exit reaches a fidelity (≥90% agreement, no significant loss under one global setting)
+   that FastV does not reach at any K/R tested, and it does so with 32–41% less prefill than the unpruned model".
+4. **They compose.** FastV K2 R0.5 + lens τ=0.05 at 39% FLOPs keeps 86.0% (−1.2 pt; significant only on GQA, like
+   FastV K2 R0.5 alone) versus FastV K2 R0.75 at 33% with 81.0% (−3.1 pt; significant on POPE and GQA). Adding the
+   exit on top of FastV changes POPE/MME agreement by < 1 pt, GQA −2.5, TextVQA −6 (accuracy 51.1 → 50.1, n.s.).
+5. **Matched fidelity vs fixed exit (fixed curve E16–E28 on POPE/GQA, E16/E24 on MME/TextVQA):** GQA +11.3 pt FLOPs
+   for lens τ=0.05 (95.5% @ 73% vs fixed 84%) and lens τ=0.0245 (96.7% @ 77% vs 88%); cf τ=0.05 (96.8% @ 76%) is above
+   every fixed E ≤ 28. POPE/MME: fixed E16 is as good or better (−1 to −7 pt), as before.
+6. **Adaptivity (v2 cf):** Spearman vs the Phase A oracle exit +0.50 (GQA), +0.58 (TextVQA), +0.11 (POPE); lens
+   +0.42 / +0.22 / −0.33 (lens exits at ~18 on every POPE item, where the oracle is noise). Exit ≥ oracle on 91–99% of
+   examples. GQA lens exit by type: query 25.6, choose 22.0, compare 19.3, verify 18.6, logical 18.3 (as §8E.3).
+7. **MME accuracy printed in the notebook (81.8) was wrong; the files give 74.4**, consistent with §8E. Cause: the
+   eval loop returned in-memory records keyed by id, so for MME's repeated ids the second question's record was
+   counted twice. Fixed in `build_phaseB.py` (records keyed by (id, occurrence); the same bug also made MME resume
+   skip the twin of an already-done id). Offline scripts over the files are authoritative.
+
+### 8F.3 LLaVA-NeXT-7B, same τ, no recalibration (n = 300 per benchmark; SE ≈ ±2.7 pt)
+Visual tokens per image: mean 2.07k (MME) – 2.33k (TextVQA), range 984–2928; sequence ≈ 98% visual, so FLOPs ≈
+E/32. Baseline prefill 1.85–2.08 s; decoding ≤ 10 tokens adds 115–214 ms.
+
+| Method | POPE | MME | GQA | TextVQA | Mean FLOPs | Mean agree | Mean acc Δ |
+|---|---|---|---|---|---|---|---|
+| baseline | 92.0 / 100 / 100 (1973) | 76.0 / 100 / 100 (1849) | 61.3 / 100 / 100 (1991) | 68.0 / 100 / 100 (2075) | 100 | 100 | — |
+| fixed E16 | 92.0 / 100 / 50 (1115) | 76.3 / 97.7 / 51 (1042) | 53.3\* / 71.3 / 51 (1120) | 16.8\* / 23.3 / 51 (1161) | 51 | 73.1 | −14.7 |
+| fixed E24 | 92.0 / 100 / 75 (1516) | 77.0 / 98.3 / 75 (1413) | 61.3 / 94.3 / 75 (1517) | 62.7\* / 86.3 / 75 (1591) | 75 | 94.8 | −1.1 |
+| lens τ=0.1 | 92.0 / 100 / 58 (1233) | 77.3 / 98.7 / 59 (1172) | 61.3 / 94.3 / 67 (1392) | 62.0\* / 86.0 / 74 (1604) | 65 | 94.8 | −1.2 |
+| lens τ=0.05 | 92.0 / 100 / 59 (1269) | 77.0 / 99.0 / 61 (1205) | 61.0 / 96.0 / 70 (1463) | 63.8\* / 89.3 / 79 (1699) | 67 | 96.1 | −0.9 |
+| cf τ=0.05 | 92.0 / 100 / 61 (1315) | 74.3 / 95.7 / 52 (1074) | 62.3 / 97.3 / 76 (1585) | 67.6 / 98.7 / 94 (2001) | 71 | 97.9 | −0.3 |
+| FastV K2 R0.5 | 90.7 / 98.0 / 51 (1116) | 75.0 / 96.3 / 52 (1036) | 62.0 / 94.7 / 51 (1110) | 65.8 / 88.3 / 51 (1153) | 51 | 94.3 | −1.0 |
+
+Mean exit / never exiting, lens τ=0.05: 18.9 / 0%, 19.4 / 0%, 22.4 / 9%, 25.1 / 21%; cf τ=0.05: 19.5 / 0%,
+16.4 / 1%, 24.3 / 10%, 30.1 / 56%.
+
+Findings:
+1. **τ transfers on POPE, MME and GQA.** lens τ=0.05: 100 / 99.0 / 96.0% agreement at 59 / 61 / 70% FLOPs, no
+   significant accuracy change; cf τ=0.05: 100 / 95.7 / 97.3% at 61 / 52 / 76%. Prefill on POPE 1.27 s vs 1.97 s
+   (−36%), GQA 1.46 vs 1.99 (−27%), TextVQA 1.70 vs 2.08 (−18%).
+2. **TextVQA is the exception.** NeXT's TextVQA baseline is 68.0 (vs 50.8 on LLaVA-1.5) and the image is needed
+   deeper: lens τ=0.05 63.8 (p=0.013, 2/12 discordant), lens τ=0.1 62.0 (p=0.001), fixed E24 62.7 (p=0.004). cf τ=0.05
+   holds (67.6, 98.7% agreement) but only by rarely exiting (94% FLOPs). FastV K2 R0.5: 65.8 at 51% (p=0.38, 8/13),
+   inconclusive at n=300. **The single global lens τ=0.05 chosen on LLaVA-1.5 is therefore not loss-free on
+   LLaVA-NeXT TextVQA**; the pooled Phase A calibration value (τ=0.0245, §8D) and a larger TextVQA subset are the next
+   run.
+3. **Probe overhead on NeXT is negligible:** residuals vs the FLOPs fit, relative to the baseline's own residual
+   (+11 ms): lens τ=0.05 ≈ 0 ms, lens τ=0.1 −8, cf τ=0.05 +16, FastV −19, on a ~2 s prefill.
+4. **Matched fidelity (fixed curve E16/E24 only):** POPE: fixed E16 already keeps 100% at 50%, so every adaptive
+   point is 7–11 pt worse (no per-image headroom, as on LLaVA-1.5). MME: lens τ=0.05/0.1 (99.0 / 98.7%) are above
+   both fixed points. GQA: lens τ=0.1 94.3% @ 67% vs fixed E24 94.3% @ 75% (+8.4 pt); lens τ=0.05 (96.0% @ 70%) and cf
+   (97.3% @ 76%) are above every fixed E run — E28 is needed on NeXT to quantify this. TextVQA: lens τ=0.1 ties fixed
+   E24 (+0.9 pt); lens τ=0.05 and cf are above every fixed E run.
+5. **FastV on NeXT looks stronger than on LLaVA-1.5** (94.3% mean agreement at 51%, no significant loss at n=300).
+   With ~2.3k visual tokens the attention term dominates FLOPs, so halving tokens at layer 2 is both cheaper and, with
+   AnyRes tiles, apparently less harmful. The exit-vs-FastV comparison on NeXT needs the larger subsets and the
+   combined method before it can be stated.
+
+### 8F.4 Decisions
+1. Keep **lens exit, τ=0.05** as the LLaVA-1.5 default, but the paper's "one global τ" must be set by a calibration
+   protocol (held-out images, target fidelity), not by the sweep; re-run NeXT with that τ (0.0245) and τ=0.01.
+2. **cf τ=0.05 is the conservative variant**: never significantly worse on either model, highest agreement, now
+   cheap (≈ +20 ms on LLaVA-1.5, ≈ +16 ms on NeXT), but saves little on OCR-heavy tasks.
+3. Report FastV K2 R0.5 / R0.75 on the same engine as the token-pruning baseline, and FastV + exit as the combined
+   point; do not claim exit beats FastV at matched FLOPs.
+4. Fix the §8E-vs-§8F cf discrepancy (v1 vs v2 probe) before quoting cf numbers in the paper.
+
+---
+
+## 8G. Calibration protocol: one global threshold chosen on held-out data (29 Oct 2026, CPU over §8E files)
+
+**Why.** The default τ=0.05 in §8E.5 was picked by looking at the sweep. For the paper the threshold must come from a
+protocol: pick the cheapest setting whose fidelity on a *calibration* set reaches a target T, then evaluate on
+disjoint examples. The same protocol applied to a fixed exit layer is exactly VTW's dataset-level rule, so it also
+yields the fair fixed-exit baseline. Script: `tools/analysis/phaseB_calibration.py` (`--targets 0.95,0.97,0.98
+--frac 0.2 --seeds 50`). Grid: fixed E ∈ {12,16,20,24,28}, lens τ ∈ {0.01,0.0245,0.05,0.1,0.2}, cf τ ∈ {0.025,0.05,0.1}.
+Pooled agreement = mean of per-benchmark agreement (equal benchmark weight). "Cheapest" = lowest mean FLOPs.
+
+### 8G.1 Random split: 20% of every benchmark for calibration, evaluation on the other 80%, 50 seeds
+| Target | Family | Setting chosen (seeds) | Target met | Eval FLOPs | Eval agree (min bench) | Eval acc Δ | Seeds with a significant loss |
+|---|---|---|---|---|---|---|---|
+| 95% | fixed (VTW-style) | E28 ×48, E24 ×2 | 50/50 | 87.6% | 97.0 (92.7) | −0.30 | TextVQA 4% |
+| 95% | **lens** | **τ=0.05 ×28**, 0.1 ×12, 0.0245 ×9, 0.01 ×1 | 50/50 | **68.0%** | 95.7 (89.0) | −0.25 | TextVQA 6% |
+| 95% | cf | τ=0.05 ×50 | 50/50 | 66.9% | 96.9 (95.5) | −0.33 | none |
+| 97% | fixed | E28 ×50 | 24/50 | 88.1% | 97.2 (93.1) | −0.27 | none |
+| 97% | lens | τ=0.01 ×30, 0.0245 ×15, 0.05 ×5 | 42/50 | 73.7% | 97.3 (93.4) | −0.33 | GQA 4% |
+| 97% | cf | τ=0.025 ×26, 0.05 ×24 | 50/50 | 73.9% | 98.1 (97.0) | −0.19 | none |
+| 98% | fixed | E28 ×50 | 5/50 | 88.1% | 97.2 (93.1) | −0.27 | none |
+| 98% | lens | τ=0.01 ×46, 0.0245 ×4 | 12/50 | 75.5% | 97.7 (94.3) | −0.39 | GQA 4% |
+| 98% | cf | τ=0.025 ×49, 0.05 ×1 | 50/50 | 80.1% | 99.4 (98.5) | −0.05 | none |
+
+("Target met" = seeds where some grid setting reached T on the calibration split; otherwise the most conservative
+setting is used. "Significant loss" = exact McNemar p < 0.05 on that seed's evaluation split.)
+
+1. **The protocol recovers the defaults.** At T=95% it picks lens τ=0.05 (28/50 seeds) and cf τ=0.05 (50/50), the
+   settings used in §8E–§8F; the default is no longer a sweep choice.
+2. **Adaptive exit beats the VTW-style fixed layer by 14–20 pt FLOPs at every target**, at equal or higher evaluation
+   agreement: 68% vs 88% (T=95), 74% vs 88% (T=97), 80% (cf) vs 88% (T=98). The fixed layer cannot reach 97% on the
+   calibration split in half the seeds and 98% in 45 of 50 (E28 is the deepest in the grid; E32 would be the
+   unpruned model).
+3. **Mean accuracy change is within ±0.4 pt for every family and target**; significant losses occur in ≤ 6% of seeds
+   (TextVQA for lens at T=95, GQA at T≥97), i.e. at the nominal false-positive rate.
+4. cf is the safest family (min-benchmark agreement 95.5–98.5%); lens is the cheapest at T=95%.
+
+### 8G.2 Leave-one-benchmark-out: choose on the other three benchmarks, evaluate on the held-out one
+| Held-out | T | fixed → acc Δ / agree / FLOPs | lens → acc Δ / agree / FLOPs | cf → acc Δ / agree / FLOPs |
+|---|---|---|---|---|
+| POPE | 95% | E28 → +0.0 / 100 / 88 | τ=0.0245 → +0.0 / 99.8 / 61 | τ=0.05 → +0.1 / 99.9 / 54 |
+| MME | 95% | E28 → −0.2 / 98.9 / 88 | τ=0.05 → +0.8 / 98.6 / 60 | τ=0.05 → −0.8 / 95.6 / 49 |
+| GQA | 95% | E28 → −0.3 / 96.7 / 88 | τ=0.05 → −0.8 / 95.5 / 73 | τ=0.05 → −0.2 / 96.0 / 73 |
+| **TextVQA** | 95% | E24 → **−2.3\*** / 82.8 / 76 | τ=0.2 → **−3.3\*** / 77.0 / 70 | τ=0.05 → −0.5 / 96.0 / 91 |
+| TextVQA | 97% | E24 → **−2.3\*** / 82.8 / 76 | τ=0.1 → −1.3 / 84.6 / 75 | τ=0.05 → −0.5 / 96.0 / 91 |
+| TextVQA | 98% | E28 → −0.6 / 93.0 / 88 | τ=0.0245 → −0.5 / 92.4 / 85 | τ=0.025 → +0.0 / 100 / 98 |
+
+(POPE/MME/GQA held out at T=97/98: no significant change for any family; lens picks τ=0.01 at 66–82% FLOPs, cf picks
+τ=0.025/0.05.) \* p < 0.05.
+
+5. **TextVQA is the transfer stress test.** Calibrated on POPE/MME/GQA (which saturate early), a fixed layer (E24)
+   and lens τ=0.2 both fail significantly on TextVQA at T=95%; cf τ=0.05 does not. At T=98% every family transfers.
+   This is the LLaVA-1.5 analogue of the LLaVA-NeXT TextVQA result (§8F.3): **a threshold calibrated on tasks that
+   saturate early is too loose for OCR-heavy tasks unless the fidelity target is high (≥97–98%) or the cf signal is
+   used.**
+
+### 8G.3 Decisions
+1. **Paper protocol:** one global threshold per family, chosen at T=95% on a pooled calibration split (report the
+   seed distribution), evaluated on the rest; VTW baseline = the same protocol over E. Report T=97/98% as the
+   conservative operating points.
+2. **Defaults stay lens τ=0.05 / cf τ=0.05** (now protocol-derived). For LLaVA-NeXT, run the T=97/98 picks too
+   (lens τ=0.01, cf τ=0.025) since NeXT TextVQA needs a tighter threshold (§8F.3).
+3. Fix the τ for NeXT *before* looking at NeXT results (transfer test): τ from the LLaVA-1.5 protocol, no NeXT
+   calibration.
 
 ---
 
@@ -728,6 +913,10 @@ Write the **analysis paper**: Findings 1–9, plus the random control (§7), a s
 | Analysis mixed drop ratios | `fixed_k_runs` keyed by K only | R-aware `fixed_k_runs(runs, r)` and `ratios()` |
 | Lost results after a Kaggle reset | `/kaggle/working` wiped when the session ended | Zip `results/` and `cache/` after every run, or Save Version |
 | Latency not meaningful | `use_cache=False` (FastV's cache path is broken) | Report FLOPs now; Phase B engine adds KV cache |
+| In-notebook MME accuracy 81.8 vs 74.4 from the files (§8F.2.7) | `run_eval` returned records keyed by id; MME ids repeat, so one record per pair was counted twice; resume also skipped the twin | Key cached records by (id, occurrence) in `build_phaseB.py`; agreement by position; offline scripts are authoritative |
+| cf probe +70 ms prefill overhead (§8E.4) | v1 recomputed full-sequence K/V at every probed layer | Engine v2 reads the layer's cached K/V, one query row: ≈ +20 ms (§8F.2.1) |
+| Matched-fidelity interpolation reported a saving on a flat fixed-E curve (NeXT POPE: 100% at E16 and E24) | `np.interp` on non-monotone agreement picks the later point | Script now takes the cheapest fixed point reaching the target agreement |
+| `phaseB_sweep_tables.py` crashed on `fastv_*` names and computed MME agreement by id | method-name parser and id-keyed agreement | Family-aware sort (baseline, fixed, lens, cf, fastv, combos); agreement by (id, occurrence) |
 
 ---
 
@@ -739,7 +928,12 @@ Write the **analysis paper**: Findings 1–9, plus the random control (§7), a s
 - Does fidelity translate into task accuracy and *measured* latency with the KV cache (Phase B)?
 - Does uniform 50% subsampling from layer 2 keep fidelity (Phase C)?
 - Is the "focused attention breaks more at high R" effect on POPE real (§6.3)?
-- Do findings 3–5 hold on a second model and on localization benchmarks?
+- ~~Does the one-threshold result hold on TextVQA and MME?~~ → yes on LLaVA-1.5 (§8E); on LLaVA-NeXT it holds on POPE/MME/GQA but **not on TextVQA** for lens τ=0.05 (§8F.3).
+- ~~Does fidelity translate into accuracy and measured latency with the KV cache?~~ → yes (§8D–§8F); the cf probe is now ≈ +20 ms (§8F.2).
+- Why does the v2 cf probe exit ~1 layer earlier than v1 at the same τ (§8F.2.2)? Check on a few examples before fixing cf numbers.
+- ~~Which τ does a held-out calibration protocol pick?~~ → lens/cf τ=0.05 at T=95%, lens τ=0.01 / cf τ=0.025 at T=98% (§8G). Does the T=97/98 pick transfer to LLaVA-NeXT TextVQA? (next NeXT run)
+- Is FastV K2 R0.5 really loss-free on LLaVA-NeXT (n=300, p=0.38 on TextVQA)? Needs 500–600 examples.
+- Do findings 3–5 hold on a second model and on localization benchmarks? (Second model: exit results in §8F.3; InfoScore/FastV-sweep analysis not repeated.)
 
 ---
 
@@ -750,4 +944,6 @@ Write the **analysis paper**: Findings 1–9, plus the random control (§7), a s
   - `cache/calib_{pope,gqa}_L{2-16,0-31}_n150.json`: H_data, sorted per-layer H_img, and per-image traces.
 - **Phase A results:** `phaseA_results_v2.zip` → `phaseA/profile_{pope,gqa,textvqa,mme}.jsonl` (per example: `preserved[E]`, `exit_top1`, `exit_kl`, per-layer `cf_*`, `mass_*`, `lens_*`), `verify_{pope,gqa}.jsonl`.
 - **Phase B results:** `phaseB_results.zip` (20 Oct) → `phaseB/{pope,mme,gqa,textvqa}__{method}.jsonl` (20 methods) (answer, exit_layer, rel_flops, t_prefill, t_total, pred, correct), `calib.json`, `latency.json`.
+- **Engine v2 results:** `phaseB2_llava15.zip` → `phaseB2/llava15/{pope,mme,gqa,textvqa}__{method}.jsonl` (13 / 10 / 13 / 10 methods incl. `fastv_K{2,3}_R{0.5,0.75}`, `fastv_K2_R0.5+lens_t0.05_m1_e1`, v2 `cf_t{0.05,0.1}_m2_e12`; records add `n_vis`), `latency.json`; `phaseB2_llavanext.zip` → `phaseB2/llavanext/` (7 methods × 4 benchmarks, 300 each), `latency.json`. Kaggle log of the LLaVA-1.5 run: `results/phaseb2-engine-v2.log` (unit tests, latency table).
+- **Analysis scripts:** `tools/analysis/phaseB_calibration.py` (held-out threshold selection, §8G), `tools/analysis/phaseB_sweep_tables.py` (acc / agreement / FLOPs / latency / McNemar), `phaseB_matched_fidelity.py`, `phaseB_adaptivity.py` (needs Phase A profiles; numpy fallback for Spearman), `phaseB_latency_overhead.py` (probe overhead as residual vs the FLOPs→time fit).
 - **Docs:** `research-and-literature.md` and this file.
