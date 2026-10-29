@@ -1,0 +1,214 @@
+% CounterPrune draft. Generic article class so it compiles anywhere; swap for the venue class (cvpr/neurips/iclr).
+% Every number comes from docs/results-and-execution-plan.md, which is recomputed from results/ by tools/analysis/.
+% Sections marked TODO depend on the LLaVA-NeXT follow-up run (HANDOFF §7 item 3).
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,multirow,graphicx,xcolor,hyperref,natbib}
+\newcommand{\method}{CounterPrune}
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\sig}{$^{*}$}
+
+\title{\method: Training-Free Per-Image Visual-Token Exit for Vision-Language Models}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Visual tokens dominate the prefill cost of LLaVA-style vision-language models (VLMs): a single image contributes 576
+tokens in LLaVA-1.5 and up to 2{,}928 in LLaVA-NeXT, more than 95\% of the sequence. Attention-guided token pruning
+reduces this cost but must materialise attention weights, which breaks fused attention kernels, and prior analyses show
+that the ranking criterion matters less than how many layers see the full token set. We propose \method, a
+training-free method that removes \emph{all} visual tokens at a layer chosen \emph{per image} by a cheap signal read
+during the forward pass: either the logit-lens stability of the last token (KL divergence between consecutive layers'
+next-token distributions) or a one-row counterfactual probe (the change in the last token's attention update when the
+visual keys are removed, computed from the layer's KV cache). Neither signal needs attention matrices, so \method{}
+runs on SDPA/FlashAttention with a standard KV cache; later layers simply cache fewer tokens. With one global threshold
+chosen by a held-out calibration protocol, \method{} keeps the unpruned model's answers with no statistically
+significant accuracy change on POPE, MME, GQA and TextVQA at 68\% of baseline prefill FLOPs on LLaVA-1.5-7B, whereas
+the dataset-level fixed exit layer (VTW) selected by the same protocol needs 88\%. The exit layer tracks a per-example
+oracle (Spearman 0.5--0.6 on GQA and TextVQA) and separates question types. Measured prefill latency follows FLOPs, the
+probe costs under 20\,ms, and \method{} composes with FastV-style token pruning on the same engine. The same threshold
+transfers to LLaVA-NeXT-7B on POPE, MME and GQA; OCR-heavy TextVQA needs the higher fidelity target. \todo{update
+after the NeXT follow-up run}
+\end{abstract}
+
+\section{Introduction}
+\todo{write; key points below}
+\begin{itemize}
+\item Prefill cost is dominated by visual tokens; attention is quadratic in length.
+\item Attention-guided pruning (FastV, SparseVLM, PDrop) ranks tokens with decoder attention: needs eager attention,
+  and the ranking criterion matters little (FEATHER, Wen et al.; our InfoScore analysis, \S\ref{sec:analysis}).
+\item Visual-token exit (VTW) is kernel-compatible but dataset-level; per-instance exits (DyVTE, AdaVSkip) are trained.
+\item Contributions: (i) a training-free per-image exit with two kernel-compatible signals; (ii) a calibration
+  protocol that yields one global threshold and the fair VTW baseline; (iii) an SDPA + KV-cache engine in which exit,
+  fixed exit and FastV are evaluated with measured latency; (iv) an analysis showing why attention-ranking quality
+  does not matter (depth dominates) and that a per-image signal has to come from elsewhere.
+\end{itemize}
+
+\section{Related work}
+\paragraph{Attention-guided token pruning.} FastV \citep{chen2024fastv} prunes low-attention visual tokens after a
+fixed early layer; SparseVLM \citep{zhang2024sparsevlm} uses text-selected raters with progressive pruning; PyramidDrop
+and STAR-Pro refine the schedule. All rank tokens with decoder attention, which requires materialising attention
+weights and is incompatible with fused kernels.
+\paragraph{Critiques.} \citet{endo2025feather} show that FastV's early-layer attention is dominated by RoPE-induced
+positional bias and fails on localisation; \citet{wen2025token} find that random selection and pooling match elaborate
+criteria on most benchmarks. Our layer-wise InfoScore analysis gives an information-theoretic account: attention in
+layers 0--1 is nearly image-independent, yet ranking with the most content-adaptive layer yields no gain.
+\paragraph{Visual-token exit.} VTW \citep{lin2024vtw} removes all visual tokens after a dataset-level layer chosen by a
+KL criterion on a sample. DyVTE \citep{dyvte2024} and AdaVSkip \citep{adavskip2026} make the decision per instance with
+trained hypernetworks or routers. HiDrop combines late injection, progressive pruning and exit in a trained fixed
+schedule. \method{} is, to our knowledge, the first training-free per-instance exit that is also compatible with fused
+attention kernels and KV caching. \todo{re-check 2025--26 literature before submission}
+
+\section{Method}
+\label{sec:method}
+\paragraph{Setting.} A decoder with $L$ layers processes a sequence of $n_0$ tokens, of which a contiguous block of
+$n_v$ are visual. Prefill FLOPs per layer at length $n$ follow the FastV formula $4nd^2 + 2n^2d + 2ndm$ ($d$ hidden,
+$m$ FFN size); we report FLOPs summed over layers at the actual per-layer sequence length, relative to the unpruned
+model.
+\paragraph{Per-image exit.} Before (or after) each layer $E$, a scalar signal $s_E$ is read from the last token. Once
+$s_E \le \tau$ for $m$ consecutive layers and $E \ge E_{\min}$, all visual tokens are dropped: hidden states are sliced,
+original position ids are kept, and layers $E{:}L$ attend over text tokens only. The KV cache of later layers holds
+fewer tokens, so decoding needs no special masking.
+\paragraph{Signal 1: logit-lens stability (lens).} $s_E = \mathrm{KL}\big(\mathrm{lens}_E \,\|\, \mathrm{lens}_{E-1}\big)$
+where $\mathrm{lens}_E = \mathrm{softmax}(W_U\,\mathrm{norm}(h^{(E)}_{\text{last}}))$. Cost: one LM-head product
+per layer on one token. Default $\tau=0.05$, $m=1$, $E_{\min}=1$ (the signal never fires before layer $\approx$17 in
+practice).
+\paragraph{Signal 2: one-row counterfactual probe (cf).} After layer $E$, read its cached keys/values, recompute the
+last token's query, and form one attention row with and without the visual keys:
+$s_E = \|W_O(\mathrm{Attn}(q, K, V) - \mathrm{Attn}(q, K_{\neg v}, V_{\neg v}))\| / \|h_{\text{last}}\|$.
+Cost: one attention row and one $W_O$ product. Default $\tau=0.05$, $m=2$, $E_{\min}=12$.
+\paragraph{Kernel compatibility.} Neither signal needs attention matrices. The engine runs stock layers with
+\texttt{attention\_mask=None} (causal SDPA), explicit position ids and a \texttt{DynamicCache}; it reproduces the stock
+model's logits to $|\Delta| \le 0.008$ in fp16 and its greedy text.
+\paragraph{Calibration protocol.} One global $\tau$ per signal is the cheapest grid value whose pooled agreement with
+the unpruned model on a calibration split reaches a target $T$. Applying the same rule to a fixed exit layer $E$ is
+exactly VTW's dataset-level selection, which gives the fair fixed-exit baseline.
+\paragraph{Composition with token pruning.} FastV's criterion (last-token attention over visual tokens at layer $K-1$)
+is the same one-row attention, so FastV runs on the same engine and can precede the exit.
+
+\section{Experiments}
+\label{sec:exp}
+\paragraph{Setup.} LLaVA-1.5-7B and LLaVA-NeXT-7B (Vicuna), fp16, SDPA, KV cache, batch 1, 2$\times$T4. POPE (900;
+300 per split), MME (660, $\le$50 per category; two questions per image), GQA testdev-balanced (600), TextVQA (500, VQA
+soft accuracy, no OCR tokens). Greedy decoding, full-answer scoring. We report accuracy, agreement with the unpruned
+model's answers, relative prefill FLOPs and measured prefill latency; paired accuracy differences use the exact McNemar
+test. Standard errors: $\pm$1.1 (POPE), $\pm$1.7 (MME), $\pm$2.0 (GQA), $\pm$2.2 (TextVQA) points.
+
+\subsection{Main result: one global threshold}
+\begin{table}[t]
+\centering\small
+\caption{LLaVA-1.5-7B, one global setting. Accuracy / agreement with the unpruned model / relative prefill FLOPs (\%).
+\sig: significantly worse than the unpruned model (exact McNemar, $p<0.05$). Fixed-E rows are the VTW-style exit.}
+\label{tab:main}
+\begin{tabular}{lccccc}
+\toprule
+Method & POPE & MME & GQA & TextVQA & Mean FLOPs \\
+\midrule
+Unpruned & 88.6 / 100 / 100 & 74.4 / 100 / 100 & 60.2 / 100 / 100 & 50.8 / 100 / 100 & 100 \\
+Fixed E16 & 88.8 / 99.6 / 52 & 74.7 / 98.8 / 53 & 53.0\sig / 73.3 / 53 & 17.1\sig / 27.0 / 53 & 52 \\
+Fixed E24 & 88.6 / 100 / 76 & 74.2 / 98.6 / 76 & 59.2 / 93.0 / 76 & 48.5\sig / 82.8 / 76 & 76 \\
+Fixed E28 & 88.6 / 100 / 88 & 74.2 / 98.9 / 88 & 59.8 / 96.7 / 88 & 50.2 / 93.0 / 88 & 88 \\
+FastV K2 R0.5 & 88.2 / 95.0 / 54 & 73.6 / 95.6 / 55 & 57.0\sig / 88.2 / 55 & 51.1 / 86.8 / 55 & 55 \\
+FastV K2 R0.75 & 84.7\sig / 88.6 / 32 & 72.6 / 90.3 / 33 & 54.3\sig / 78.2 / 33 & 49.9 / 76.8 / 33 & 33 \\
+\midrule
+\method{} lens $\tau$=0.05 & 88.6 / 99.8 / 59 & 75.2 / 98.6 / 60 & 59.3 / 95.5 / 73 & 49.9 / 89.8 / 80 & \textbf{68} \\
+\method{} cf $\tau$=0.05 & 88.4 / 98.8 / 50 & 73.8 / 95.2 / 50 & 59.8 / 96.8 / 76 & 50.7 / 97.4 / 93 & 67 \\
+\method{} cf $\tau$=0.025 & 88.4 / 99.9 / 67 & 74.4 / 98.5 / 67 & 60.2 / 99.3 / 89 & 50.8 / 100 / 98 & 80 \\
+FastV K2 R0.5 + lens $\tau$=0.05 & 88.3 / 95.1 / 34 & 73.9 / 95.3 / 35 & 56.8\sig / 85.7 / 42 & 50.1 / 80.8 / 45 & 39 \\
+\bottomrule
+\end{tabular}
+\end{table}
+Table~\ref{tab:main} (results doc \S8E/\S8F): with $\tau=0.05$, neither signal changes accuracy significantly on any
+benchmark. The only fixed layer that is equally safe everywhere is E28 at 88\% FLOPs; fixed E24 (76\%) is
+significantly worse on TextVQA and E16 keeps only 27\% of TextVQA answers. Mean FLOPs for lens exit: 68\% (59--60\% on
+POPE/MME, 73\% GQA, 80\% TextVQA). Fixed exit layers fail on tasks that need the image late; the per-image exit adapts.
+
+\subsection{Calibration protocol and the VTW baseline}
+\begin{table}[t]
+\centering\small
+\caption{Threshold chosen on a 20\% calibration split of every benchmark (pooled agreement $\ge T$), evaluated on the
+remaining 80\%; 50 random splits. Same rule over fixed $E$ = VTW. Evaluation FLOPs / agreement / mean accuracy change.}
+\label{tab:calib}
+\begin{tabular}{llccc}
+\toprule
+$T$ & Family & Chosen (seeds) & Eval FLOPs & Eval agree / acc $\Delta$ \\
+\midrule
+95\% & Fixed (VTW) & E28 $\times$48, E24 $\times$2 & 87.6 & 97.0 / $-$0.30 \\
+95\% & lens & $\tau$=0.05 $\times$28, 0.1 $\times$12, 0.0245 $\times$9, 0.01 $\times$1 & \textbf{68.0} & 95.7 / $-$0.25 \\
+95\% & cf & $\tau$=0.05 $\times$50 & 66.9 & 96.9 / $-$0.33 \\
+97\% & Fixed (VTW) & E28 $\times$50 (target met in 24/50) & 88.1 & 97.2 / $-$0.27 \\
+97\% & lens & $\tau$=0.01 $\times$30, 0.0245 $\times$15, 0.05 $\times$5 & 73.7 & 97.3 / $-$0.33 \\
+97\% & cf & $\tau$=0.025 $\times$26, 0.05 $\times$24 & 73.9 & 98.1 / $-$0.19 \\
+98\% & Fixed (VTW) & E28 $\times$50 (target met in 5/50) & 88.1 & 97.2 / $-$0.27 \\
+98\% & lens & $\tau$=0.01 $\times$46, 0.0245 $\times$4 & 75.5 & 97.7 / $-$0.39 \\
+98\% & cf & $\tau$=0.025 $\times$49, 0.05 $\times$1 & 80.1 & 99.4 / $-$0.05 \\
+\bottomrule
+\end{tabular}
+\end{table}
+Table~\ref{tab:calib} (results doc \S8G): the protocol recovers $\tau=0.05$ for both signals at $T=95\%$ and places
+\method{} 14--20 FLOPs points below the VTW-style fixed layer at every target, at equal or higher evaluation agreement.
+Significant losses on the evaluation split occur in at most 6\% of seeds, the nominal rate. Leave-one-benchmark-out:
+calibrated on POPE/MME/GQA at $T=95\%$, fixed E24 ($-$2.3\sig) and lens $\tau=0.2$ ($-$3.3\sig) fail on TextVQA while
+cf $\tau=0.05$ holds ($-$0.5); at $T=98\%$ every family transfers.
+
+\subsection{Matched fidelity}
+At the agreement each adaptive point reaches, a fixed layer needs 8--13 FLOPs points more on GQA (lens $\tau=0.05$:
+95.5\% at 73\% vs.\ fixed 84\%) and 3--4 on TextVQA; cf $\tau\le0.05$ and lens $\tau\le0.0245$ reach 92--100\%
+agreement on TextVQA, which no fixed $E\le28$ reaches below 97\% FLOPs. On POPE and MME a per-benchmark-tuned E16 is as
+good as any adaptive point: visual dependency is homogeneous there and there is nothing to adapt to.
+
+\subsection{Adaptivity}
+The exit layer correlates with a per-example oracle (the earliest layer after which dropping all visual tokens keeps
+the baseline answer): Spearman $+0.51$ (GQA) and $+0.57$ (TextVQA) for cf, $+0.42$ / $+0.22$ for lens; the exit is at or
+after the oracle for 91--99\% of examples. GQA open-ended ``query'' questions exit at layer 25.6 on average, ``choose''
+22.0, ``compare'' 19.3, ``verify'' 18.6, ``logical'' 18.3. MME categories all exit at 17.7--19.7, like POPE.
+
+\subsection{Latency and probe cost}
+Measured prefill time follows FLOPs: lens $\tau=0.05$ 336\,ms at 59\% FLOPs vs.\ fixed E20 343\,ms at 64\% (POPE,
+LLaVA-1.5, baseline 498\,ms). The residual of each method's prefill time against a linear FLOPs$\to$time fit of the
+unpruned and fixed-exit runs measures probe cost: lens $+5$ to $+11$\,ms, cache-based cf $+21$\,ms (a recompute-based
+cf probe costs $+77$\,ms), FastV-in-engine $+22$ to $+25$\,ms. On LLaVA-NeXT (prefill $\approx$2\,s) all probes are
+below 1.5\% of prefill.
+
+\subsection{Comparison and composition with FastV on the same engine}
+FastV K2 R0.5 keeps 88\% of answers at 55\% FLOPs and is significantly worse on GQA; \method{} at 67--68\% keeps
+92--94\% with no significant loss. At FastV's operating point the exit alone is worse (cf $\tau=0.1$: 86.5\%,
+$-$2.5 points). The two compose: FastV K2 R0.5 + lens $\tau=0.05$ reaches 39\% FLOPs at $-$1.2 points, against FastV K2
+R0.75 at 33\% and $-$3.1 points (significant on POPE and GQA). Uniform spatial subsampling of visual tokens (50\% from
+layer 2) is an ablation, not part of the method: $-$2.3 points mean, $-$6.5 on TextVQA.
+
+\subsection{Second model: LLaVA-NeXT-7B}
+\todo{replace with the follow-up run (600 GQA / 500 TextVQA, $\tau\in\{0.01,0.0245,0.05,0.1\}$, cf 0.025/0.05, E16--28,
+FastV R0.5/R0.75, FastV+lens)}. Current 300-example runs with the LLaVA-1.5 thresholds (results doc \S8F.3): lens
+$\tau=0.05$ keeps 100 / 99.0 / 96.0\% of answers on POPE / MME / GQA at 59 / 61 / 70\% FLOPs with no significant change
+(prefill $-$36\% on POPE), but is significantly worse on TextVQA ($63.8$ vs.\ $68.0$, $p=0.013$), where NeXT's higher
+resolution makes the image matter deeper; cf $\tau=0.05$ holds everywhere (98.7\% agreement on TextVQA at 94\% FLOPs).
+This mirrors the leave-one-benchmark-out result on LLaVA-1.5: a threshold calibrated on early-saturating tasks is too
+loose for OCR-heavy tasks unless the fidelity target is $\ge$97--98\% or the cf signal is used.
+
+\section{Analysis: why attention-ranking quality does not matter}
+\label{sec:analysis}
+\todo{condense results doc \S3--\S6 (InfoScore layers 0--1 image-independent, 2--3 most content-adaptive; ranking
+with any layer gives the same accuracy; depth dominates; per-image attention entropy has AUC $\approx$0.5 for
+predicting pruning damage; oracle headroom at R=0.9: 29\% / 34\% FLOPs vs.\ 59--60\% for K=17).}
+
+\section{Limitations}
+Per-image exits break batching (batch 1, or pad to the latest exit in the batch). The lens signal never fires before
+layer $\approx$17, so savings are bounded at about 45\% on tasks that saturate early (cf fires from layer 12). FLOPs
+and latency are prefill-only; decoding benefits only through the smaller KV cache. Timings are SDPA on T4;
+FlashAttention-2 numbers need an Ampere GPU. Localisation benchmarks (RefCOCO) are not evaluated.
+
+\bibliographystyle{plainnat}
+\begin{thebibliography}{9}
+\bibitem[Chen et al.(2024)]{chen2024fastv} L. Chen et al. An image is worth 1/2 tokens after layer 2: Plug-and-play inference acceleration for large vision-language models. ECCV 2024.
+\bibitem[Zhang et al.(2024)]{zhang2024sparsevlm} Y. Zhang et al. SparseVLM: Visual token sparsification for efficient vision-language model inference. arXiv:2410.04417.
+\bibitem[Endo et al.(2025)]{endo2025feather} M. Endo et al. Feather the throttle: Revisiting visual token pruning for vision-language model acceleration. ICCV 2025.
+\bibitem[Wen et al.(2025)]{wen2025token} Z. Wen et al. Token pruning in multimodal large language models: Are we solving the right problem? ACL Findings 2025.
+\bibitem[Lin et al.(2024)]{lin2024vtw} Z. Lin et al. Boosting multimodal large language models with visual tokens withdrawal for rapid inference. arXiv:2405.05803.
+\bibitem[DyVTE(2024)]{dyvte2024} Accelerating multimodal large language models via dynamic visual-token exit and the empirical findings. arXiv:2411.19628.
+\bibitem[AdaVSkip(2026)]{adavskip2026} Adaptive visual token skipping across layers for efficient MLLMs inference. arXiv:2609.15131.
+\end{thebibliography}
+\end{document}

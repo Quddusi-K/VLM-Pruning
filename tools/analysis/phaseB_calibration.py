@@ -22,12 +22,19 @@ def is_grid(n): return (n.startswith(("fixed_E", "lens_t", "cf_t")) and "uni" no
 names = sorted(n for n in set.intersection(*(set(R[b]) for b in BENCH)) if is_grid(n))
 FAM = {"fixed": [n for n in names if n.startswith("fixed")], "lens": [n for n in names if n.startswith("lens")], "cf": [n for n in names if n.startswith("cf")]}
 def corr(r): return r["correct"] >= 1 if isinstance(r["correct"], float) else bool(r["correct"])
+def occ_keys(recs):   # (id, k-th occurrence): MME ids repeat; files may be in a different item order after a resumed run
+    seen=Counter(); out=[]
+    for r in recs: out.append((r["id"],seen[r["id"]])); seen[r["id"]]+=1
+    return out
+def aligned(recs, base):   # method records reordered to the baseline's (id, occurrence) order
+    d=dict(zip(occ_keys(recs),recs)); bk=occ_keys(base); assert set(d)==set(bk), "record sets differ"
+    return [d[k] for k in bk]
 # per-record arrays (aligned by position with baseline; MME ids repeat)
 X = {}
 for b in BENCH:
     base = R[b]["baseline"]
     for n in names + ["baseline"]:
-        recs = R[b][n]; assert len(recs) == len(base), (b, n)
+        recs = aligned(R[b][n], base)
         X[b, n] = dict(agree=np.array([x["pred"] == y["pred"] for x, y in zip(recs, base)], float),
                        acc=np.array([r["correct"] for r in recs], float), c=np.array([corr(r) for r in recs], bool),
                        fl=np.array([r["rel_flops"] for r in recs], float))

@@ -5,8 +5,16 @@ R={b:{p.stem.split("__",1)[1]:[json.loads(l) for l in open(p)] for p in sorted(D
 # duplicate-id check
 for b in BENCH:
     ids=[r["id"] for r in R[b]["baseline"]]; print(b, "records", len(ids), "unique ids", len(set(ids)))
-def agree_pos(b,n):  # by position (files written in item order)
-    a=R[b][n]; base=R[b]["baseline"]; assert len(a)==len(base)
+from collections import Counter
+def occ_keys(recs):   # (id, k-th occurrence): MME ids repeat; files may be in a different item order after a resumed run
+    seen=Counter(); out=[]
+    for r in recs: out.append((r["id"],seen[r["id"]])); seen[r["id"]]+=1
+    return out
+def aligned(recs, base):   # method records reordered to the baseline's (id, occurrence) order
+    d=dict(zip(occ_keys(recs),recs)); bk=occ_keys(base); assert set(d)==set(bk), "record sets differ"
+    return [d[k] for k in bk]
+def agree_pos(b,n):  # aligned by (id, occurrence) with the baseline
+    base=R[b]["baseline"]; a=aligned(R[b][n],base)
     return np.mean([x["pred"]==y["pred"] for x,y in zip(a,base)])
 def fl(b,n): return np.mean([r["rel_flops"] for r in R[b][n]])
 print("\nMME agreement by position:")

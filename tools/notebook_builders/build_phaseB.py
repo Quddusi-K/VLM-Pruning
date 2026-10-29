@@ -597,7 +597,12 @@ def run_eval(bench, cfg, max_items=None):
             if (i + 1) % 100 == 0:
                 print(f"  {i+1}/{len(todo)}")
     free_mem()
-    return [done[k] for k in keys]
+    recs = [done[k] for k in keys]
+    if todo:   # keep the file in item order (a restored subset run may have been appended out of order)
+        with open(path, "w") as f:
+            for r in recs:
+                f.write(json.dumps(r) + "\n")
+    return recs
 
 METHODS = [ExitConfig("none"),
            ExitConfig("lens", **CALIB["lens"]),

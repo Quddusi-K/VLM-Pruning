@@ -16,13 +16,16 @@ def key(n):
     m=re.search(r"_E(\d+)|_t([\d.]+)|_K(\d+)_R([\d.]+)",head)
     num=float(next((g for g in (m.groups() if m else ()) if g),0))
     return (("uni" in n), ("+" in n), fam, -num if fam in (2,3) else num, n)
-def occ_keys(recs):   # (id, k-th occurrence) -- MME ids repeat (two questions per image), files are in item order
+def occ_keys(recs):   # (id, k-th occurrence): MME ids repeat; files may be in a different item order after a resumed run
     seen=Counter(); out=[]
     for r in recs: out.append((r["id"],seen[r["id"]])); seen[r["id"]]+=1
     return out
+def aligned(recs, base):   # method records reordered to the baseline's (id, occurrence) order
+    d=dict(zip(occ_keys(recs),recs)); bk=occ_keys(base); assert set(d)==set(bk), "record sets differ"
+    return [d[k] for k in bk]
 def stats(b,n):
-    recs=R[b][n]; base=R[b]["baseline"]; bp={k:r["pred"] for k,r in zip(occ_keys(base),base)}
-    acc=np.mean([r["correct"] for r in recs]); ag=np.mean([bp[k]==r["pred"] for k,r in zip(occ_keys(recs),recs)])
+    base=R[b]["baseline"]; recs=aligned(R[b][n],base)
+    acc=np.mean([r["correct"] for r in recs]); ag=np.mean([x["pred"]==y["pred"] for x,y in zip(recs,base)])
     fl=np.mean([r["rel_flops"] for r in recs]); ex=[r["exit_layer"] if r["exit_layer"] is not None else 32 for r in recs]
     bc=[ (r["correct"]>=1 if isinstance(r["correct"],float) else bool(r["correct"])) for r in base]
     c=[ (r["correct"]>=1 if isinstance(r["correct"],float) else bool(r["correct"])) for r in recs]

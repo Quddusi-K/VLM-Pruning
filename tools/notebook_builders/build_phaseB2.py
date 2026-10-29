@@ -20,9 +20,15 @@ Changes vs Phase B:
   at layer K−1), so FastV K/R runs on SDPA + KV cache here, for a like-for-like latency comparison.
 - **Model switch.** `MODEL_TAG = "llava15"` or `"llavanext"` (`llava-hf/llava-v1.6-vicuna-7b-hf`, up to ~2.9k visual
   tokens). Results go to `/kaggle/working/phaseB2/<MODEL_TAG>/`. LLaVA-NeXT is run with the **same τ as LLaVA-1.5**
-  (no recalibration) on smaller subsets.
+  (no recalibration): the settings picked by the LLaVA-1.5 calibration protocol (results doc §8G) at T=95% (lens/cf
+  τ=0.05) and T=98% (lens τ=0.01, cf τ=0.025), plus the fixed-E curve and FastV, on 300 POPE / 300 MME / 600 GQA /
+  500 TextVQA (the earlier 300-example NeXT runs are strided subsets of these lists and are reused by the resumable loop
+  when `phaseB2_llavanext.zip` is attached).
+- **§5b cf probe check.** The v2 (cache) probe exits about one layer earlier than the v1 (recompute) probe at the same τ
+  (results doc §8F.2.2); §5b prints both per-layer values and both decision rules on 20 POPE images.
 
-Run order: §1–§3, **§4 unit tests**, §5 data (+ restore of previous LLaVA-1.5 results), §6 latency, §7 evaluation.
+Run order: §1–§3, **§4 unit tests**, §5 data (+ restore), §5b probe check, §6 latency, §7 evaluation
+(NeXT: TextVQA and GQA first, so the informative benchmarks finish even if the session is cut short).
 ''')
 
 md("## 1. Environment + install (stock transformers 4.49). Restart the kernel after the install if transformers was already imported.")
@@ -329,11 +335,11 @@ free_mem()
 ''')
 
 md(r'''
-## 5. Data (same sampling as before; `N_SUB` caps each benchmark — use the full sets for LLaVA-1.5, 300 each for LLaVA-NeXT)
+## 5. Data (same sampling as before; `N_SUB` caps each benchmark — full sets for LLaVA-1.5; 300/300/600/500 for LLaVA-NeXT)
 Previous LLaVA-1.5 results are restored from an attached `phaseB_results.zip` dataset so baseline / fixed / lens runs are reused.
 ''')
 code(r'''
-N_SUB = {"llava15": None, "llavanext": 300}[MODEL_TAG]
+N_SUB = {"llava15": None, "llavanext": {"pope": 300, "mme": 300, "gqa": 600, "textvqa": 500}}[MODEL_TAG]
 ''')
 code(grab("code(r'''\n%%bash\nmkdir -p /kaggle/working/data && cd /kaggle/working/data", "code(r'''\nN_PER_SPLIT, N_GQA = 300, 600")[len("code(r'''\n"):-len("''')\n")])
 code(grab("code(r'''\nN_PER_SPLIT, N_GQA = 300, 600", "code(r'''\n# Optional: TextVQA + MME")[len("code(r'''\n"):-len("''')\n")].replace(
@@ -344,18 +350,62 @@ code(grab("code(r'''\n# Optional: TextVQA + MME", "md(r'''\n## 8. Latency")[len(
     '    print("TextVQA", len(textvqa_items), "| MME", len(mme_items))',
     '''
 if N_SUB:   # strided subset so POPE splits / MME categories stay mixed; ids are a subset of the full LLaVA-1.5 runs
-    BENCH = {b: (items[::max(1, len(items) // N_SUB)][:N_SUB], suf, kind) for b, (items, suf, kind) in BENCH.items()}
+    BENCH = {b: (items[::max(1, len(items) // N_SUB[b])][:N_SUB[b]], suf, kind) for b, (items, suf, kind) in BENCH.items()}
 for b, (items, _, _) in BENCH.items():
     print(b, len(items))
 # restore previous results for this model (attach phaseB_results.zip / phaseB2 outputs as a dataset)
 restored = 0
 for p in Path("/kaggle/input").rglob("*__*.jsonl"):
     if MODEL_TAG == "llava15" and ("phaseB/" in str(p) or f"phaseB2/{MODEL_TAG}" in str(p)) or (MODEL_TAG != "llava15" and f"phaseB2/{MODEL_TAG}" in str(p)):
-        if "cf_" in p.name or "uni" in p.name:      # old expensive-probe cf runs and uniform ablations: do not reuse
+        if MODEL_TAG == "llava15" and ("cf_" in p.name or "uni" in p.name):      # old expensive-probe cf runs and uniform ablations: do not reuse
             continue
         if not (OUT / p.name).exists():
             shutil.copy(p, OUT / p.name); restored += 1
 print("restored result files:", restored)'''))
+
+md(r"""
+## 5b. cf probe check: v1 (recompute K/V from the layer input, Phase B) vs v2 (read the layer's cache) on 20 POPE images
+Prints the per-layer values of both probes, their max difference, and the exit layer each decision rule implies
+(v1 rule: decide before layer E from value E; v2 rule: decide after layer E, exit before E+1). τ=0.05, m=2, E_min=12.
+""")
+code(grab("@torch.no_grad()\ndef cf_last_res", "\n\nclass ExitConfig") + r'''
+
+PROBE_N, P_TAU, P_M, P_EMIN = 20, 0.05, 2, 12
+_pope_all, _, _ = BENCH["pope"]
+_rows = []
+with torch.no_grad():
+    for it in _pope_all[::max(1, len(_pope_all) // PROBE_N)][:PROBE_N]:
+        inp = build_inputs(Image.open(it["image_path"]).convert("RGB"), it["question"])
+        emb = merged_embeddings(inp); n0 = emb.shape[1]; img_s, img_n = visual_span(inp["input_ids"], n0)
+        pos = torch.arange(n0, device=emb.device)
+        vis = torch.zeros(n0, dtype=torch.bool, device=emb.device); vis[img_s:img_s + img_n] = True
+        cache = DynamicCache(); h = emb; v1, v2 = [], []
+        for E, layer in enumerate(LAYERS):
+            v1.append(cf_last_res(layer, h, pos[None], vis))                 # v1: from the layer input, before the layer runs
+            h_in = h; h = run_layer(layer, h, pos[None], cache, pos)
+            v2.append(probe_row(layer, E, h_in, pos[None], cache, vis)[1])   # v2: from the layer's cache, after it runs
+        _rows.append((v1, v2))
+v1 = np.array([r[0] for r in _rows]); v2 = np.array([r[1] for r in _rows])
+np.set_printoptions(linewidth=200)
+print("per-layer max |v1 - v2| over images:", np.round(np.abs(v1 - v2).max(0), 4))
+print("per-layer mean v1:", np.round(v1.mean(0), 3))
+print("per-layer mean v2:", np.round(v2.mean(0), 3))
+def _exit_rule(vals, post):
+    run = 0
+    for E, val in enumerate(vals):
+        run = run + 1 if val <= P_TAU else 0
+        if post:
+            if E + 1 < len(vals) and E + 1 >= P_EMIN and run >= P_M:
+                return E + 1
+        elif E >= P_EMIN and run >= P_M:
+            return E
+    return None
+for vname, vals in (("v1 values", v1), ("v2 values", v2)):
+    for post in (False, True):
+        ex = [_exit_rule(v, post) or 32 for v in vals]
+        print(f"{vname:<10} + {'v2 rule (post-layer)' if post else 'v1 rule (pre-layer) '}: mean exit {np.mean(ex):5.2f}  {ex}")
+free_mem()
+''')
 
 md("## 6. Latency (20 POPE images, 8 new tokens, EOS ignored)")
 code(r'''
@@ -405,11 +455,14 @@ code(grab("code(r'''\ndef parse_yes_no(text):", "code(r'''\ndef mcnemar(a, b):")
                ExitConfig("cf", tau=0.05, m=2, e_min=12), ExitConfig("cf", tau=0.1, m=2, e_min=12),
                ExitConfig("lens", tau=0.05), ExitConfig("lens", tau=0.05, prune="fastv", fastv_k=2, fastv_r=0.5),
                ExitConfig("fixed", exit_layer=16), ExitConfig("fixed", exit_layer=24)]
-else:   # LLaVA-NeXT: same tau as LLaVA-1.5, no recalibration
-    METHODS = [ExitConfig("none"), ExitConfig("lens", tau=0.05), ExitConfig("lens", tau=0.1),
-               ExitConfig("cf", tau=0.05, m=2, e_min=12),
-               ExitConfig("fixed", exit_layer=16), ExitConfig("fixed", exit_layer=24),
-               ExitConfig(prune="fastv", fastv_k=2, fastv_r=0.5)]''')
+else:   # LLaVA-NeXT: same tau as LLaVA-1.5, no recalibration (T=95% and T=98% picks of the §8G protocol)
+    METHODS = [ExitConfig("none"),
+               ExitConfig("lens", tau=0.05), ExitConfig("lens", tau=0.01), ExitConfig("lens", tau=0.0245), ExitConfig("lens", tau=0.1),
+               ExitConfig("cf", tau=0.05, m=2, e_min=12), ExitConfig("cf", tau=0.025, m=2, e_min=12),
+               ExitConfig("fixed", exit_layer=16), ExitConfig("fixed", exit_layer=20), ExitConfig("fixed", exit_layer=24), ExitConfig("fixed", exit_layer=28),
+               ExitConfig(prune="fastv", fastv_k=2, fastv_r=0.5), ExitConfig(prune="fastv", fastv_k=2, fastv_r=0.75),
+               ExitConfig("lens", tau=0.05, prune="fastv", fastv_k=2, fastv_r=0.5)]
+    BENCH = {b: BENCH[b] for b in ("textvqa", "gqa", "pope", "mme") if b in BENCH}   # most informative benchmarks first''')
      .replace('rec = {"id": it["id"], "answer": r["text"], "exit_layer": r["exit_layer"], "rel_flops": round(r["rel_flops"], 4),',
               'rec = {"id": it["id"], "answer": r["text"], "exit_layer": r["exit_layer"], "rel_flops": round(r["rel_flops"], 4), "n_vis": r["n_vis"],')
      .replace('os.system(f"cd {WORK} && zip -rq phaseB_results.zip phaseB")\nprint("zipped ->", WORK / "phaseB_results.zip")',

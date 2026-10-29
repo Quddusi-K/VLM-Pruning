@@ -64,8 +64,8 @@ token ranking); that hypothesis failed cleanly and became the motivation/analysi
   (InfoScore≈1), layers 2–3 most content-adaptive, yet ranking tokens with any layer gives the same accuracy; depth
   dominates. Per-image attention entropy has AUC≈0.5 for predicting pruning damage. (Keep as motivation.)
 - Prior work to position against: VTW (training-free, dataset-level exit), DyVTE and AdaVSkip (per-instance but
-  trained), FEATHER / Wen et al. (critiques of attention-based ranking). Name collision: "InfoPrune" is taken
-  (arXiv 2511.19518) — **the method needs a new name.**
+  trained), FEATHER / Wen et al. (critiques of attention-based ranking). **Method name: CounterPrune** (decided
+  29 Oct 2026; no collision found). "InfoPrune" is taken (arXiv 2511.19518) and names only the archived hypothesis.
 
 ## 4. Repository layout
 
@@ -73,7 +73,8 @@ token ranking); that hypothesis failed cleanly and became the motivation/analysi
 HANDOFF.md                      this file
 CLAUDE.md                       conventions for Claude Code sessions
 docs/
-  results-and-execution-plan.md all numbers, findings, decisions, problem log (sections 0–12; 8A–8E are the exit work)
+  paper/main.tex                 CounterPrune LaTeX draft (numbers copied from the results doc; TODOs marked)
+  results-and-execution-plan.md all numbers, findings, decisions, problem log (sections 0–12; 8A–8G are the exit work)
   research-and-literature.md    definitions (K, R, FLOPs, H_img, H_data, InfoScore), literature, gap table, draft related work
   archive-InfoPrune-project-overview-2026-09-28.md   early overview, superseded
 notebooks/
@@ -142,12 +143,15 @@ Regenerate a notebook: `cd tools/notebook_builders && python build_phaseB2.py` (
    stress case (fixed E24 and lens τ=0.2 fail at T=95%, cf holds).
 3. **NeXT follow-up Kaggle run** (`MODEL_TAG="llavanext"`, one session ≈ 8–10 h): N_SUB 600 GQA / 500 TextVQA (POPE/MME
    stay 300; ids are a strided subset, so the 300 records are reused by the resumable loop); add lens τ=0.0245 and
-   τ=0.01, cf τ=0.025, fixed E20 and E28, FastV K2 R0.75, FastV K2 R0.5 + lens; keep the rest. Edit the `METHODS`
-   list for `llavanext` in `build_phaseB2.py` and set `N_SUB` per benchmark. Answers: do the T=95/98 picks from
-   §8G transfer to NeXT TextVQA; is FastV really loss-free on NeXT; matched fidelity above E24.
-4. **cf v1-vs-v2 check**: on ~20 POPE examples print the per-layer probe value from both implementations (v1 code is
-   in `build_phaseB.py`); explain the ~1-layer-earlier exit (§8F.2.2). Then fix cf numbers.
-5. Decide the method name and the default (lens τ from item 2; cf τ=0.05 as the conservative variant).
+   τ=0.01, cf τ=0.025, fixed E20 and E28, FastV K2 R0.75, FastV K2 R0.5 + lens; keep the rest. **Notebook prepared
+   29 Oct** (`phaseB2-engine-v2.ipynb`: 14 NeXT methods, per-benchmark `N_SUB`, TextVQA/GQA run first, §5b cf
+   v1-vs-v2 probe check on 20 POPE images, result files rewritten in item order after a resumed run). Set
+   `MODEL_TAG="llavanext"`, attach the GQA datasets and `phaseB2_llavanext.zip`. Answers: do the T=95/98 picks from
+   §8G transfer to NeXT TextVQA; is FastV really loss-free on NeXT; matched fidelity above E24; cf v1 vs v2.
+4. **cf v1-vs-v2 check**: now §5b of the B2 notebook (runs inside item 3). Read its output: if the per-layer values
+   match, the difference is the decision rule (v1 decides before layer E from value E, v2 after layer E for E+1); if
+   the values differ, look at the cache/RoPE path in `probe_row`. Then fix cf numbers (§8F.2.2).
+5. ~~Decide the method name~~ → **CounterPrune** (29 Oct). Default: lens τ=0.05 (protocol-derived, §8G); cf τ=0.05 as the conservative variant.
 6. Main-table baselines are now all on one engine: unpruned, fixed exit (VTW), FastV K2 R0.5 / R0.75, FastV + exit.
    Add uniform-only from §8E; cite DyVTE / AdaVSkip as trained references.
 7. Robustness notes for the paper: batch>1 (per-image exits break batching → batch 1 or pad to the latest exit in the
@@ -155,8 +159,10 @@ Regenerate a notebook: `cd tools/notebook_builders && python build_phaseB2.py` (
 8. Optional: RefCOCO/localization, Ampere FA2 latency (rent an A100/L4; SDPA numbers are T4), Qwen2.5-VL port.
 9. Literature re-check for 2025–26 training-free per-instance visual exit before submission (AdaVSkip, Sept 2026, is
    the closest; it is trained).
-10. Write-up: motivation = InfoScore analysis + FastV sweep (depth dominates); method = per-image exit; results =
-    §8E/§8F tables, latency, adaptivity, NeXT transfer; ablations = τ, signal, uniform stage, FastV composition.
+10. Write-up: LaTeX draft started 29 Oct in `docs/paper/main.tex` (abstract, related work, method, experiments
+    with §8E/§8F/§8G tables, limitations). Open: introduction, the analysis section (condense results doc §3–§6), the
+    NeXT section after item 3, figures (accuracy-vs-FLOPs curves, exit-layer histograms), venue class, bibliography
+    check. No LaTeX compiler on this machine; build on Overleaf or install TeX Live.
 
 ## 8. Kaggle setup reminders
 

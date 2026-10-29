@@ -18,7 +18,7 @@ We study **training-free visual token reduction** in vision-language models (VLM
 2. **Finding.** The per-image entropy score does not predict which examples pruning breaks (AUC about 0.5 at every pruning ratio). The layer-level InfoScore cleanly separates layers, but the layer it recommends prunes no better than FastV's default. Accuracy is driven by *depth*, meaning how many layers process the full token set, not by the quality of the ranking layer.
 3. **Current direction.** A method paper on **training-free, per-image "visual token exit"** that stays compatible with FlashAttention and the KV cache. The fallback is an analysis or negative-results paper built from what we already have.
 
-> **Naming:** do **not** call the final method "InfoPrune". arXiv 2511.19518 already uses that name for an information-theoretic structural pruning method (see §5.7).
+> **Naming:** the method is **CounterPrune** (decided 29 October 2026; a web search for "CounterPrune" / "Counter-Prune" found no paper, code or product). Do **not** call it "InfoPrune": arXiv 2511.19518 already uses that name for an information-theoretic structural pruning method (see §5.7).
 
 ---
 

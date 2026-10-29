@@ -17,7 +17,8 @@ then docs/results-and-execution-plan.md (numbers) and docs/research-and-literatu
 - GPU work runs on Kaggle (2×T4, fp16, SDPA). This repo holds code, docs and analysis; results/ is untracked.
 - After a Kaggle run: zip results/cache before the session ends; attach the zip as a dataset for restore cells.
 - Keep docs/results-and-execution-plan.md's status table and "open questions" current whenever results land.
-- The method name "InfoPrune" is taken by another paper (arXiv 2511.19518); do not use it for the exit method.
+- The exit method is called **CounterPrune** (decided 29 Oct 2026; web search found no collision). "InfoPrune" is
+  taken by another paper (arXiv 2511.19518) and refers only to the archived Phase 1 hypothesis.
 
 ## Default method settings
 lens exit: tau=0.05, m=1, e_min=1 (one global threshold; no per-benchmark tuning). cf exit: tau=0.05, m=2, e_min=12.
